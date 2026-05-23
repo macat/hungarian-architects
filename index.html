@@ -5,336 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hungarian Architects Directory — 200+ Architects from Three Centuries</title>
 <meta name="description" content="The definitive English-language directory of Hungarian architects. 200+ entries spanning Classicism, Secession, Bauhaus, Socialist Modernism, Organic Architecture, and Contemporary practice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #faf9f6;
-  --card-bg: #ffffff;
-  --text: #1a1a1a;
-  --text-muted: #6b6b6b;
-  --accent: #b85c38;
-  --accent-light: #e8cfc0;
-  --border: #e5e1db;
-  --tag-bg: #f0ebe4;
-  --tag-text: #5c4a3a;
-  --hero-bg: #2c2c2c;
-  --hero-text: #faf9f6;
-  --search-bg: #ffffff;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
-  --radius: 8px;
-  --radius-lg: 12px;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --bg: #faf9f6; --card-bg: #ffffff; --text: #1a1a1a; --text-muted: #6b6b6b;
+  --accent: #b85c38; --accent-light: #e8cfc0; --border: #e5e1db;
+  --tag-bg: #f0ebe4; --tag-text: #5c4a3a; --hero-bg: #2c2c2c; --hero-text: #faf9f6;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,.1);
+  --radius: 8px; --radius-lg: 12px;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
 
 /* Hero */
-.hero {
-  background: var(--hero-bg);
-  color: var(--hero-text);
-  padding: 4rem 2rem 3rem;
-  text-align: center;
-}
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
-}
-.hero .subtitle {
-  font-size: 1.15rem;
-  color: rgba(250,249,246,0.75);
-  max-width: 600px;
-  margin: 0 auto 1.5rem;
-}
-.hero .stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-.hero .stat {
-  text-align: center;
-}
-.hero .stat-num {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-.hero .stat-label {
-  font-size: 0.85rem;
-  color: rgba(250,249,246,0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
+.hero{background:var(--hero-bg);color:var(--hero-text);padding:4rem 2rem 3rem;text-align:center}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
+.hero .subtitle{font-size:1.15rem;color:rgba(250,249,246,.75);max-width:600px;margin:0 auto 1.5rem}
+.hero .stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1rem}
+.hero .stat-num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent)}
+.hero .stat-label{font-size:.85rem;color:rgba(250,249,246,.6);text-transform:uppercase;letter-spacing:.05em}
 
 /* Controls */
-.controls {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: center;
-}
-.search-box {
-  position: relative;
-  flex: 1;
-  min-width: 200px;
-  max-width: 400px;
-}
-.search-box input {
-  width: 100%;
-  padding: 0.6rem 1rem 0.6rem 2.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: 0.95rem;
-  background: var(--search-bg);
-  font-family: var(--font-body);
-  transition: border-color 0.2s;
-}
-.search-box input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
-}
-.search-box::before {
-  content: "🔍";
-  position: absolute;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.9rem;
-}
-.filter-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background: var(--card-bg);
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-family: var(--font-body);
-  color: var(--text-muted);
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.filter-btn.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-.results-count {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  padding: 0.25rem 0.75rem;
-  white-space: nowrap;
-}
+.controls{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center}
+.search-box{position:relative;flex:1;min-width:200px;max-width:400px}
+.search-box input{width:100%;padding:.6rem 1rem .6rem 2.5rem;border:1px solid var(--border);border-radius:var(--radius);font-size:.95rem;background:#fff;font-family:var(--font-body);transition:border-color .2s}
+.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.search-box::before{content:"🔍";position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.9rem}
+.filter-btn{padding:.5rem 1rem;border:1px solid var(--border);border-radius:20px;background:var(--card-bg);cursor:pointer;font-size:.85rem;font-family:var(--font-body);color:var(--text-muted);transition:all .2s;white-space:nowrap}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.results-count{font-size:.85rem;color:var(--text-muted);padding:.25rem .75rem;white-space:nowrap}
 
-/* Main content */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:2rem}
+.era-section{margin-bottom:3rem}
+.era-header{font-family:var(--font-display);font-size:1.75rem;font-weight:700;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent)}
+.era-description{color:var(--text-muted);font-size:.95rem;margin-bottom:1.5rem;max-width:800px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.25rem}
 
-/* Era sections */
-.era-section {
-  margin-bottom: 3rem;
-}
-.era-header {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--accent);
-}
-.era-description {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-  max-width: 800px;
-}
+/* Card */
+.architect-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .2s,transform .1s;display:flex;flex-direction:column;cursor:pointer}
+.architect-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.architect-card.expanded{grid-column:1/-1;cursor:default}
+.architect-card.expanded:hover{transform:none}
 
-/* Card grid */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.25rem;
-}
+/* Card Image */
+.card-img-wrap{position:relative;width:100%;height:220px;overflow:hidden;background:#e5e1db}
+.card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.architect-card:hover .card-img{transform:scale(1.03)}
+.card-img-caption{position:absolute;bottom:0;left:0;right:0;padding:.4rem .75rem;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff;font-size:.75rem}
+.no-img{height:0}
 
-/* Architect card */
-.architect-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  transition: box-shadow 0.2s, transform 0.1s;
-  display: flex;
-  flex-direction: column;
-}
-.architect-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-1px);
-}
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-}
-.card-name {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.3;
-}
-.card-years {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  white-space: nowrap;
-  margin-left: 0.5rem;
-}
-.card-style {
-  font-size: 0.85rem;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-.card-desc {
-  font-size: 0.9rem;
-  color: var(--text);
-  line-height: 1.5;
-  margin-bottom: 0.75rem;
-  flex-grow: 1;
-}
-.card-works {
-  margin-bottom: 0.75rem;
-}
-.card-works h4 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-  margin-bottom: 0.4rem;
-}
-.card-works ul {
-  list-style: none;
-  padding: 0;
-}
-.card-works li {
-  font-size: 0.85rem;
-  padding: 0.15rem 0;
-  color: var(--text);
-  position: relative;
-  padding-left: 1rem;
-}
-.card-works li::before {
-  content: "·";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: 700;
-}
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: auto;
-}
-.tag {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-.tag-era {
-  background: var(--tag-bg);
-  color: var(--tag-text);
-}
-.tag-award {
-  background: #fef3c7;
-  color: #92400e;
-}
-.tag-intl {
-  background: #dbeafe;
-  color: #1e40af;
-}
-.tag-organic {
-  background: #d1fae5;
-  color: #065f46;
-}
+/* Card Body */
+.card-body{padding:1.25rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem}
+.card-name{font-family:var(--font-display);font-size:1.2rem;font-weight:700;line-height:1.3}
+.card-years{font-size:.85rem;color:var(--text-muted);white-space:nowrap;margin-left:.5rem}
+.card-style{font-size:.85rem;color:var(--accent);font-weight:500;margin-bottom:.5rem}
 
-/* Compact card for table entries */
-.compact-card {
-  padding: 1rem 1.25rem;
-}
-.compact-card .card-name { font-size: 1.05rem; }
+/* Links */
+.card-links{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-links a{display:inline-flex;align-items:center;gap:.2rem;font-size:.7rem;padding:.15rem .45rem;border-radius:4px;background:var(--tag-bg);color:var(--tag-text);text-decoration:none;transition:all .2s;font-weight:500}
+.card-links a:hover{background:var(--accent-light);color:var(--accent)}
+.card-links a svg{width:12px;height:12px;flex-shrink:0}
+.link-w{background:#e8e8e8 !important;color:#555 !important}
+.link-w:hover{background:#ccc !important}
+
+.card-desc{font-size:.9rem;line-height:1.5;margin-bottom:.75rem;flex-grow:1}
+.card-works{margin-bottom:.75rem}
+.card-works h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);margin-bottom:.4rem}
+.card-works ul{list-style:none;padding:0}
+.card-works li{font-size:.85rem;padding:.15rem 0;position:relative;padding-left:1rem}
+.card-works li::before{content:"·";position:absolute;left:0;color:var(--accent);font-weight:700}
+.card-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto}
+.tag{display:inline-block;padding:.2rem .6rem;border-radius:12px;font-size:.75rem;font-weight:500}
+.tag-era{background:var(--tag-bg);color:var(--tag-text)}
+.tag-award{background:#fef3c7;color:#92400e}
+.tag-intl{background:#dbeafe;color:#1e40af}
+.tag-organic{background:#d1fae5;color:#065f46}
+
+/* Expand hint */
+.expand-hint{font-size:.72rem;color:var(--accent);text-align:right;margin-top:.5rem;opacity:.7;transition:opacity .2s}
+.architect-card:hover .expand-hint{opacity:1}
+.architect-card.expanded .expand-hint{display:none}
+
+/* Detail View */
+.detail-section{display:none;border-top:1px solid var(--border);padding:1.5rem;background:var(--bg)}
+.architect-card.expanded .detail-section{display:block}
+.detail-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.detail-header h3{font-family:var(--font-display);font-size:1.3rem}
+.detail-close{background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:.4rem 1rem;cursor:pointer;font-size:.85rem;font-family:var(--font-body);transition:background .2s}
+.detail-close:hover{background:#9a4a2e}
+.detail-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem}
+.detail-gallery figure{margin:0;border-radius:var(--radius);overflow:hidden;background:#e5e1db}
+.detail-gallery img{width:100%;height:240px;object-fit:cover;display:block}
+.detail-gallery figcaption{font-size:.8rem;color:var(--text-muted);padding:.5rem .75rem;text-align:center;background:var(--card-bg)}
+.detail-noimg{color:var(--text-muted);font-style:italic;font-size:.9rem}
 
 /* Footer */
-.footer {
-  text-align: center;
-  padding: 3rem 2rem;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--border);
-  margin-top: 2rem;
+.footer{text-align:center;padding:3rem 2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+.footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.no-results{text-align:center;padding:3rem;color:var(--text-muted);font-size:1.1rem}
+
+@media(max-width:768px){
+  .controls{padding:.75rem 1rem}
+  .container{padding:1rem}
+  .card-grid{grid-template-columns:1fr}
+  .hero{padding:2.5rem 1.5rem 2rem}
+  .card-img-wrap{height:180px}
+  .detail-gallery{grid-template-columns:1fr}
 }
-.footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-.footer a:hover { text-decoration: underline; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .controls { padding: 0.75rem 1rem; }
-  .container { padding: 1rem; }
-  .card-grid { grid-template-columns: 1fr; }
-  .hero { padding: 2.5rem 1.5rem 2rem; }
-  .hero .stats { gap: 1.5rem; }
-}
-
-/* No results */
-.no-results {
-  text-align: center;
-  padding: 3rem;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
-
-/* Smooth scroll */
-html { scroll-behavior: smooth; }
-
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
-
-/* Hidden utility */
-.hidden { display: none !important; }
+.hidden{display:none!important}
 </style>
 </head>
 <body>
@@ -343,25 +130,14 @@ html { scroll-behavior: smooth; }
   <h1>Hungarian Architects Directory</h1>
   <p class="subtitle">The definitive English-language guide to three centuries of Hungarian architecture — from Classicism to the contemporary cutting edge.</p>
   <div class="stats">
-    <div class="stat">
-      <div class="stat-num" id="total-count">209</div>
-      <div class="stat-label">Architects</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">8</div>
-      <div class="stat-label">Eras</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">300+</div>
-      <div class="stat-label">Years</div>
-    </div>
+    <div class="stat"><div class="stat-num" id="total-count">209</div><div class="stat-label">Architects</div></div>
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label">Eras</div></div>
+    <div class="stat"><div class="stat-num">300+</div><div class="stat-label">Years</div></div>
   </div>
 </div>
 
 <div class="controls" id="controls">
-  <div class="search-box">
-    <input type="text" id="search" placeholder="Search architects, buildings, styles..." autocomplete="off">
-  </div>
+  <div class="search-box"><input type="text" id="search" placeholder="Search architects, buildings, styles..." autocomplete="off"></div>
   <button class="filter-btn active" data-filter="all">All</button>
   <button class="filter-btn" data-filter="pre-modern">Pre-Modern</button>
   <button class="filter-btn" data-filter="secession">Secession</button>
@@ -374,17 +150,18 @@ html { scroll-behavior: smooth; }
   <span class="results-count" id="results-count"></span>
 </div>
 
-<div class="container" id="directory">
-  <!-- Generated by JS -->
-</div>
+<div class="container" id="directory"></div>
 
 <div class="footer">
   <p>Compiled May 2026 · <a href="https://github.com/macat/hungarian-architects">GitHub</a> · Names follow Hungarian order (family name first) where customary</p>
-  <p style="margin-top:0.5rem">Sources: <a href="https://epiteszforum.hu">Építészfórum</a> · <a href="https://hu.wikipedia.org/wiki/Ybl_Mikl%C3%B3s-d%C3%ADj">Ybl Prize (Wikipedia)</a> · <a href="https://en.wikipedia.org/wiki/List_of_Hungarian_architects">Wikipedia</a> · <a href="https://mek.hu">Magyar Építész Kamara</a></p>
+  <p style="margin-top:.5rem">Sources: <a href="https://epiteszforum.hu">Építészfórum</a> · <a href="https://hu.wikipedia.org/wiki/Ybl_Mikl%C3%B3s-d%C3%ADj">Ybl Prize (Wikipedia)</a> · <a href="https://en.wikipedia.org/wiki/List_of_Hungarian_architects">Wikipedia</a> · <a href="https://mek.hu">Magyar Építész Kamara</a></p>
+  <p style="margin-top:.5rem;font-size:.78rem;color:#999">Building photographs from <a href="https://commons.wikimedia.org/" style="color:#999">Wikimedia Commons</a> · Creative Commons licensed</p>
 </div>
 
 <script>
 
+const architectImages = {"Pollack Mih\u00e1ly": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/S%C3%A1ndor-palota_2014.jpg/960px-S%C3%A1ndor-palota_2014.jpg", "caption": "S\u00e1ndor Palace, Buda Castle"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Budapest_by_night_-_Le_Parlement_-_photo_picture_image_photography_%289583724665%29.jpg/960px-Budapest_by_night_-_Le_Parlement_-_photo_picture_image_photography_%289583724665%29.jpg", "caption": "Hungarian National Museum, Budapest (1837\u20131847)"}], "Hild J\u00f3zsef": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Az_egri_bazilika_orgon%C3%A1ja.jpg/960px-Az_egri_bazilika_orgon%C3%A1ja.jpg", "caption": "Eger Cathedral (Basilica)"}], "Ybl Mikl\u00f3s": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Hungarian_State_Opera_House_in_Budapest.jpg/960px-Hungarian_State_Opera_House_in_Budapest.jpg", "caption": "Hungarian State Opera House, Budapest (1884)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Szent_Istv%C3%A1n-bazilika_-_01.jpg/960px-Szent_Istv%C3%A1n-bazilika_-_01.jpg", "caption": "St. Stephen's Basilica, Budapest"}], "Steindl Imre": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Budapest_Parliament_4604.JPG/960px-Budapest_Parliament_4604.JPG", "caption": "Hungarian Parliament Building, Budapest (1885\u20131904)"}], "Schulek Frigyes": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Fisherman%27s_Bastion_2014.jpg/960px-Fisherman%27s_Bastion_2014.jpg", "caption": "Fisherman's Bastion, Budapest (1895\u20131902)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Matthias_Church_2014_01.jpg/960px-Matthias_Church_2014_01.jpg", "caption": "Matthias Church, Budapest"}], "Hauszmann Alajos": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/20190502_Zamek_w_Budapeszcie_0647_1862_DxO.jpg/960px-20190502_Zamek_w_Budapeszcie_0647_1862_DxO.jpg", "caption": "Buda Castle Palace, Budapest (1896\u20131905)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/c/cd/New-york-kavehaz-budapest-2.jpg", "caption": "New York Palace (Caf\u00e9), Budapest"}], "Czigler Gy\u0151z\u0151": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Staircase_in_the_Great_Market_Hall%2C_Budapest%2C_Hungary_-_March_2025.jpg/960px-Staircase_in_the_Great_Market_Hall%2C_Budapest%2C_Hungary_-_March_2025.jpg", "caption": "Central Market Hall, Budapest"}], "Alp\u00e1r Ign\u00e1c": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Vajdahunyad_v%C3%A1ra_Budapest_September_2013.jpg/960px-Vajdahunyad_v%C3%A1ra_Budapest_September_2013.jpg", "caption": "Vajdahunyad Castle, City Park, Budapest"}], "Baumhorn Lip\u00f3t": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Szeged_synagogue_SF.jpg/960px-Szeged_synagogue_SF.jpg", "caption": "Szeged Synagogue (1903)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Wiki.Vojvodina_VII_Subotica_4599_03.jpg/960px-Wiki.Vojvodina_VII_Subotica_4599_03.jpg", "caption": "Subotica Synagogue (1902)"}], "Korb Fl\u00f3ris": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Gresham_Palace_Budapest_2009-12.jpg/960px-Gresham_Palace_Budapest_2009-12.jpg", "caption": "Gresham Palace (Four Seasons Hotel), Budapest"}], "Schickedanz Albert": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/HUN-2015-Budapest-Heroes%E2%80%99_Square.jpg/960px-HUN-2015-Budapest-Heroes%E2%80%99_Square.jpg", "caption": "Heroes' Square, Budapest"}], "Pfaff Ferenc": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Keleti_f%C3%A9nyek_....jpg/960px-Keleti_f%C3%A9nyek_....jpg", "caption": "Budapest Keleti Railway Station (1884)"}], "Haj\u00f3s Alfr\u00e9d": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/National_Swimming_Pool._Northern_part._Big_swimming_pool._-_Margaret_Island%2C_Budapest%2C_Hungary.JPG/960px-National_Swimming_Pool._Northern_part._Big_swimming_pool._-_Margaret_Island%2C_Budapest%2C_Hungary.JPG", "caption": "National Swimming Complex, Margitsziget"}], "Lechner \u00d6d\u00f6n": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Museum_of_Applied_Arts._Main_facade_from_south._BudapestDSCN3639.jpg/960px-Museum_of_Applied_Arts._Main_facade_from_south._BudapestDSCN3639.jpg", "caption": "Museum of Applied Arts, Budapest (1896)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Geological_Institute_of_Hungary_2.jpg/960px-Geological_Institute_of_Hungary_2.jpg", "caption": "Geological Institute, Budapest (1899)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Kecskem%C3%A9t_-_Cifrapalota.JPG/960px-Kecskem%C3%A9t_-_Cifrapalota.JPG", "caption": "Cifrapalota, Kecskem\u00e9t"}], "Lajta B\u00e9la": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/R%C3%B3zsav%C3%B6lgyi-h%C3%A1z%2C_Szervita_t%C3%A9r.jpg/960px-R%C3%B3zsav%C3%B6lgyi-h%C3%A1z%2C_Szervita_t%C3%A9r.jpg", "caption": "R\u00f3zsav\u00f6lgyi Building, Budapest (1912)"}], "K\u00f3s K\u00e1roly": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Snowy_polar_bears_and_Zsolnay_ceramic%2C_Budapest_ZOO_main_gate%2C_2018_V%C3%A1rosliget.jpg/960px-Snowy_polar_bears_and_Zsolnay_ceramic%2C_Budapest_ZOO_main_gate%2C_2018_V%C3%A1rosliget.jpg", "caption": "Budapest Zoo Entrance Buildings (1912)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Wekerle_family.jpg/960px-Wekerle_family.jpg", "caption": "Wekerle Estate, Budapest"}], "Magyar Ede": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Szeged_RE%C3%96K_Palota_1.jpg/960px-Szeged_RE%C3%96K_Palota_1.jpg", "caption": "Re\u00f6k Palace, Szeged (1907)"}], "\u00c1rkay Bertalan": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Varosmajor_Church.JPG/960px-Varosmajor_Church.JPG", "caption": "V\u00e1rosmajor Church, Budapest (1933)"}], "Fischer J\u00f3zsef": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Budapest_XI.%2C_Buda%C3%B6rsi_rep%C3%BCl%C5%91t%C3%A9r._Wibault_283-T_%C3%A9s_Douglas_DC-2_t%C3%ADpus%C3%BA_utassz%C3%A1ll%C3%ADt%C3%B3_rep%C3%BCl%C5%91g%C3%A9p._Fortepan_100136.jpg/960px-Budapest_XI.%2C_Buda%C3%B6rsi_rep%C3%BCl%C5%91t%C3%A9r._Wibault_283-T_%C3%A9s_Douglas_DC-2_t%C3%ADpus%C3%BA_utassz%C3%A1ll%C3%ADt%C3%B3_rep%C3%BCl%C5%91g%C3%A9p._Fortepan_100136.jpg", "caption": "Buda\u00f6rs Airport Terminal, Budapest (1937)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/M%C3%A1jus_1._mozi_%28ma_%C3%81trium_Film-Sz%C3%ADnh%C3%A1z%29._Fortepan_845.jpg/960px-M%C3%A1jus_1._mozi_%28ma_%C3%81trium_Film-Sz%C3%ADnh%C3%A1z%29._Fortepan_845.jpg", "caption": "Atrium Cinema, Budapest (1936)"}], "Breuer Marcel / Marcel Breuer": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/2003-03-ehemaliges-Whitney-Museum-New-York-Manhattan.jpg/960px-2003-03-ehemaliges-Whitney-Museum-New-York-Manhattan.jpg", "caption": "Whitney Museum (Met Breuer), NYC (1966)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Paris_-_UNESCO_%2829442665943%29.jpg/960px-Paris_-_UNESCO_%2829442665943%29.jpg", "caption": "UNESCO Headquarters, Paris (1958)"}], "Moholy-Nagy L\u00e1szl\u00f3 / L\u00e1szl\u00f3 Moholy-Nagy": [{"src": "https://upload.wikimedia.org/wikipedia/commons/5/50/Light-space-modulator-1930.jpg", "caption": "Light-Space Modulator (1930)"}], "Goldfinger Ern\u0151 / Ern\u0151 Goldfinger": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Trellick_Tower_02.JPG/960px-Trellick_Tower_02.JPG", "caption": "Trellick Tower, London (1972)"}], "Hudec L\u00e1szl\u00f3 / L\u00e1szl\u00f3 Hudec": [{"src": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Shanghai_Park_Hotel_2007.jpg", "caption": "Park Hotel, Shanghai (1934)"}], "Nyiri Istv\u00e1n": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Ferenc_Ar%C3%A9na_2019.jpg/960px-Ferenc_Ar%C3%A9na_2019.jpg", "caption": "N\u00e9pstadion (People's Stadium), Budapest (1953)"}], "Finta J\u00f3zsef": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/19738_InterR%C3%A9gi%C3%B3_Katica%2C_Budapest-D%C3%A9li_p%C3%A1lyaudvar.jpg/960px-19738_InterR%C3%A9gi%C3%B3_Katica%2C_Budapest-D%C3%A9li_p%C3%A1lyaudvar.jpg", "caption": "D\u00e9li Railway Station, Budapest (1975)"}], "Makovecz Imre": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Szentl%C3%A9lek_templom%2C_2011-04-11_Paks_Makovecz_back.jpg/960px-Szentl%C3%A9lek_templom%2C_2011-04-11_Paks_Makovecz_back.jpg", "caption": "Holy Spirit Church, Paks (1990)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sevilla_Expo_92-Pabell%C3%B3n_de_Hungr%C3%ADa-1992_05_05.jpg/960px-Sevilla_Expo_92-Pabell%C3%B3n_de_Hungr%C3%ADa-1992_05_05.jpg", "caption": "Hungarian Pavilion, Seville Expo (1992)"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Stephaneum%2C_name_sign%2C_2020_Piliscsaba.jpg/960px-Stephaneum%2C_name_sign%2C_2020_Piliscsaba.jpg", "caption": "Stephaneum, Piliscsaba"}], "Sporaarchitects (D\u00e9k\u00e1ny, Finta S., Hatvani, Vad\u00e1sz O.)": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Budapest%2C_M4_metr%C3%B3%2C_Keleti_p%C3%A1lyaudvar%2C_constructions.jpg/960px-Budapest%2C_M4_metr%C3%B3%2C_Keleti_p%C3%A1lyaudvar%2C_constructions.jpg", "caption": "M4 Metro Station, Budapest"}], "Keller Ferenc": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/P%C3%A9cs%2C_Kod%C3%A1ly_K%C3%B6zpont.jpg/960px-P%C3%A9cs%2C_Kod%C3%A1ly_K%C3%B6zpont.jpg", "caption": "Kod\u00e1ly Center, P\u00e9cs"}], "Golda J\u00e1nos": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Piarista_K%C3%B6zpont_Budapest_Duna_fel%C5%91li_homlokzat.jpg/960px-Piarista_K%C3%B6zpont_Budapest_Duna_fel%C5%91li_homlokzat.jpg", "caption": "Piarista K\u00f6zpont, Budapest"}], "Hetedik M\u0171terem / Szab\u00f3 Levente": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Normafa_S%C3%ADh%C3%A1z_%C3%89tterem.jpg/960px-Normafa_S%C3%ADh%C3%A1z_%C3%89tterem.jpg", "caption": "Normafa Ski House, Budapest"}]};
+const architectWiki = {"Ybl Mikl\u00f3s": {"en": "https://en.wikipedia.org/wiki/Mikl%C3%B3s_Ybl", "hu": "https://hu.wikipedia.org/wiki/Ybl_Mikl%C3%B3s"}, "Steindl Imre": {"en": "https://en.wikipedia.org/wiki/Imre_Steindl", "hu": "https://hu.wikipedia.org/wiki/Steindl_Imre"}, "Schulek Frigyes": {"en": "https://en.wikipedia.org/wiki/Frigyes_Schulek", "hu": "https://hu.wikipedia.org/wiki/Schulek_Frigyes"}, "Hauszmann Alajos": {"en": "https://en.wikipedia.org/wiki/Alajos_Hauszmann", "hu": "https://hu.wikipedia.org/wiki/Hauszmann_Alajos"}, "Lechner \u00d6d\u00f6n": {"en": "https://en.wikipedia.org/wiki/%C3%96d%C3%B6n_Lechner", "hu": "https://hu.wikipedia.org/wiki/Lechner_%C3%96d%C3%B6n"}, "Pollack Mih\u00e1ly": {"en": "https://en.wikipedia.org/wiki/Mih%C3%A1ly_Pollack", "hu": "https://hu.wikipedia.org/wiki/Pollack_Mih%C3%A1ly"}, "Hild J\u00f3zsef": {"en": "https://en.wikipedia.org/wiki/J%C3%B3zsef_Hild", "hu": "https://hu.wikipedia.org/wiki/Hild_J%C3%B3zsef"}, "Alp\u00e1r Ign\u00e1c": {"en": "https://en.wikipedia.org/wiki/Ign%C3%A1c_Alp%C3%A1r", "hu": "https://hu.wikipedia.org/wiki/Alp%C3%A1r_Ign%C3%A1c"}, "Baumhorn Lip\u00f3t": {"en": "https://en.wikipedia.org/wiki/Lip%C3%B3t_Baumhorn", "hu": "https://hu.wikipedia.org/wiki/Baumhorn_Lip%C3%B3t"}, "Schickedanz Albert": {"en": "https://en.wikipedia.org/wiki/Albert_Schickedanz", "hu": "https://hu.wikipedia.org/wiki/Schickedanz_Albert"}, "Korb Fl\u00f3ris": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Korb_Fl%C3%B3ris"}, "Czigler Gy\u0151z\u0151": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Czigler_Gy%C5%91z%C5%91"}, "Pfaff Ferenc": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Pfaff_Ferenc"}, "Pecz Samu": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Pecz_Samu"}, "Lajta B\u00e9la": {"en": "https://en.wikipedia.org/wiki/B%C3%A9la_Lajta", "hu": "https://hu.wikipedia.org/wiki/Lajta_B%C3%A9la"}, "K\u00f3s K\u00e1roly": {"en": "https://en.wikipedia.org/wiki/K%C3%A1roly_K%C3%B3s", "hu": "https://hu.wikipedia.org/wiki/K%C3%B3s_K%C3%A1roly"}, "Magyar Ede": {"en": "https://en.wikipedia.org/wiki/Ede_Magyar", "hu": "https://hu.wikipedia.org/wiki/Magyar_Ede"}, "Medgyaszay Istv\u00e1n": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Medgyaszay_Istv%C3%A1n"}, "\u00c1rkay Alad\u00e1r": {"en": null, "hu": "https://hu.wikipedia.org/wiki/%C3%81rkay_Alad%C3%A1r"}, "\u00c1rkay Bertalan": {"en": null, "hu": "https://hu.wikipedia.org/wiki/%C3%81rkay_Bertalan"}, "Toroczkai Wigand Ede": {"en": "https://en.wikipedia.org/wiki/Ede_Toroczkai_Wigand", "hu": "https://hu.wikipedia.org/wiki/Toroczkai_Wigand_Ede"}, "Moln\u00e1r Farkas": {"en": "https://en.wikipedia.org/wiki/Farkas_Moln%C3%A1r", "hu": "https://hu.wikipedia.org/wiki/Moln%C3%A1r_Farkas_(m%C5%B1v%C3%A9sz)"}, "Fischer J\u00f3zsef": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Fischer_J%C3%B3zsef_(%C3%A9p%C3%ADt%C3%A9sz)"}, "Kozma Lajos": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Kozma_Lajos_(%C3%A9p%C3%ADt%C3%A9sz)"}, "Preisich G\u00e1bor": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Preisich_G%C3%A1bor"}, "Weiner Tibor": {"en": "https://en.wikipedia.org/wiki/Tibor_Weiner", "hu": null}, "Breuer Marcel / Marcel Breuer": {"en": "https://en.wikipedia.org/wiki/Marcel_Breuer", "hu": "https://hu.wikipedia.org/wiki/Marcel_Breuer"}, "Moholy-Nagy L\u00e1szl\u00f3 / L\u00e1szl\u00f3 Moholy-Nagy": {"en": "https://en.wikipedia.org/wiki/L%C3%A1szl%C3%B3_Moholy-Nagy", "hu": "https://hu.wikipedia.org/wiki/Moholy-Nagy_L%C3%A1szl%C3%B3"}, "Goldfinger Ern\u0151 / Ern\u0151 Goldfinger": {"en": "https://en.wikipedia.org/wiki/Ern%C5%91_Goldfinger", "hu": null}, "Wank Roland / Roland Wank": {"en": "https://en.wikipedia.org/wiki/Roland_Wank", "hu": null}, "Hudec L\u00e1szl\u00f3 / L\u00e1szl\u00f3 Hudec": {"en": "https://en.wikipedia.org/wiki/L%C3%A1szl%C3%B3_Hudec", "hu": "https://hu.wikipedia.org/wiki/Hudec_L%C3%A1szl%C3%B3"}, "Rubik Ern\u0151 / Ern\u0151 Rubik": {"en": "https://en.wikipedia.org/wiki/Ern%C5%91_Rubik", "hu": "https://hu.wikipedia.org/wiki/Rubik_Ern%C5%91"}, "Kaufmann Oszk\u00e1r / Oskar Kaufmann": {"en": "https://en.wikipedia.org/wiki/Oskar_Kaufmann", "hu": null}, "Haj\u00f3s Alfr\u00e9d": {"en": "https://en.wikipedia.org/wiki/Alfr%C3%A9d_Haj%C3%B3s", "hu": "https://hu.wikipedia.org/wiki/Haj%C3%B3s_Alfr%C3%A9d"}, "Makovecz Imre": {"en": "https://en.wikipedia.org/wiki/Imre_Makovecz", "hu": "https://hu.wikipedia.org/wiki/Makovecz_Imre"}, "Csete Gy\u00f6rgy": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Csete_Gy%C3%B6rgy"}, "Finta J\u00f3zsef": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Finta_J%C3%B3zsef"}, "Nyiri Istv\u00e1n": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Ny%C3%ADri_Istv%C3%A1n"}, "Rajk L\u00e1szl\u00f3 Jr.": {"en": "https://en.wikipedia.org/wiki/L%C3%A1szl%C3%B3_Rajk_(architect)", "hu": null}, "Ferkai Andr\u00e1s": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Ferkai_Andr%C3%A1s"}, "Quittner Zsigmond": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Quittner_Zsigmond"}, "Rochlitz Gyula": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Rochlitz_Gyula"}, "Gy\u00f6rgyi D\u00e9nes": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Gy%C3%B6rgyi_D%C3%A9nes"}, "V\u00e1g\u00f3 J\u00f3zsef": {"en": null, "hu": "https://hu.wikipedia.org/wiki/V%C3%A1g%C3%B3_J%C3%B3zsef_(%C3%A9p%C3%ADt%C3%A9sz)"}, "Riman\u00f3czy Gyula": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Riman%C3%B3czy_Gyula_(%C3%A9p%C3%ADt%C3%A9sz,_1903%E2%80%931958)"}, "Kotsis Iv\u00e1n": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Kotsis_Iv%C3%A1n"}, "Bachman Zolt\u00e1n": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Bachman_Zolt%C3%A1n"}, "Reitter Ferenc": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Reitter_Ferenc"}, "Jung J\u00f3zsef": {"en": null, "hu": "https://hu.wikipedia.org/wiki/Jung_J%C3%B3zsef"}};
 const architects = [
 // === PRE-MODERN & HISTORICIST PIONEERS ===
 {name:"Jung József",years:"1734–1808",era:"pre-modern",style:"Late Baroque / Early Classicism",desc:"One of the earliest documented Hungarian architects, bridging Baroque and Classical periods.",works:["Church of St. Anne, Batthyány tér, Budapest"],awards:[],tags:["pre-modern"]},
@@ -604,132 +381,114 @@ const architects = [
 {name:"Dalnoki-Kováts Jenő",years:"active 1930s",era:"bauhaus",style:"Bauhaus / International Style",desc:"His villa is one of the finest surviving Bauhaus residential buildings in Budapest.",works:["Dalnoki-Kováts Villa, Budapest II. (1932)"],awards:[],tags:["bauhaus"]}
 ];
 
-
 const eraNames = {
-  "pre-modern": "Pre-Modern & Historicist Pioneers (18th–19th Century)",
-  "secession": "Secession & Art Nouveau (1890s–1910s)",
-  "bauhaus": "Bauhaus & Early Modernism (1920s–1940s)",
-  "international": "Hungarian-Born International Giants",
-  "socialist": "Post-War Modernism & Socialist Era (1945–1989)",
-  "organic": "Organic Architecture Movement",
-  "transition": "Late 20th Century & Transition Generation",
-  "contemporary": "Contemporary Architects & Firms (2000s–Present)"
+  "pre-modern":"Pre-Modern & Historicist Pioneers (18th–19th Century)",
+  "secession":"Secession & Art Nouveau (1890s–1910s)",
+  "bauhaus":"Bauhaus & Early Modernism (1920s–1940s)",
+  "international":"Hungarian-Born International Giants",
+  "socialist":"Post-War Modernism & Socialist Era (1945–1989)",
+  "organic":"Organic Architecture Movement",
+  "transition":"Late 20th Century & Transition Generation",
+  "contemporary":"Contemporary Architects & Firms (2000s–Present)"
 };
 const eraDescriptions = {
-  "pre-modern": "These architects defined Budapest during the Age of Dualism (1867–1918), when Pest and Buda merged and the capital transformed into a world-class European city.",
-  "secession": "Hungary's unique Art Nouveau — the Magyar Szecesszió — drew on folk art motifs and Eastern influences to create a distinctively national architectural language.",
-  "bauhaus": "Hungary's connection to the Bauhaus is uniquely deep. Marcel Breuer, László Moholy-Nagy, and Farkas Molnár were all Hungarian-born Bauhaus masters.",
-  "international": "Born in Hungary but achieved greatest fame internationally. Their Hungarian roots profoundly influenced their work.",
-  "socialist": "Architecture under socialism oscillated between imposed Socialist Realism, creative resistance through subtle modernism, and a cautious opening to international trends.",
-  "organic": "One of Europe's most distinctive organic architecture movements — rooted in Transylvanian folk traditions and opposed to both rationalism and socialist uniformity.",
-  "transition": "These architects came of age during late socialism and reinvented Hungarian architecture for a market economy and European integration.",
-  "contemporary": "The current generation has matured into international competitiveness, representing Hungary's contemporary architectural culture."
+  "pre-modern":"These architects defined Budapest during the Age of Dualism (1867–1918), when Pest and Buda merged and the capital transformed into a world-class European city.",
+  "secession":"Hungary's unique Art Nouveau — the Magyar Szecesszió — drew on folk art motifs and Eastern influences to create a distinctively national architectural language.",
+  "bauhaus":"Hungary's connection to the Bauhaus is uniquely deep. Marcel Breuer, László Moholy-Nagy, and Farkas Molnár were all Hungarian-born Bauhaus masters.",
+  "international":"Born in Hungary but achieved greatest fame internationally. Their Hungarian roots profoundly influenced their work.",
+  "socialist":"Architecture under socialism oscillated between imposed Socialist Realism, creative resistance through subtle modernism, and a cautious opening to international trends.",
+  "organic":"One of Europe's most distinctive organic architecture movements — rooted in Transylvanian folk traditions and opposed to both rationalism and socialist uniformity.",
+  "transition":"These architects came of age during late socialism and reinvented Hungarian architecture for a market economy and European integration.",
+  "contemporary":"The current generation has matured into international competitiveness, representing Hungary's contemporary architectural culture."
 };
 const eraOrder = ["pre-modern","secession","bauhaus","international","socialist","organic","transition","contemporary"];
+
+const wikiSvg = '<svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M12.09 13.119c-.936 1.932-2.217 4.548-2.853 5.728-.616 1.074-1.127.931-1.532.029-1.406-3.321-4.293-9.144-5.651-12.409-.251-.601-.441-.987-.619-1.139-.181-.15-.554-.24-1.122-.271C.103 5.033 0 4.982 0 4.898v-.455l.052-.045c.924-.005 5.401 0 5.401 0l.051.045v.434c0 .119-.075.176-.225.176l-.564.031c-.485.029-.727.164-.727.407 0 .2.107.59.321 1.164l3.987 9.167 2.151-4.12-1.858-4.28c-.399-.855-.655-1.381-.765-1.575-.206-.363-.51-.547-.919-.547h-.26c-.14 0-.21-.054-.21-.162v-.486l.047-.05h4.504l.047.05v.462c0 .095-.07.144-.212.149-.547.031-.818.127-.818.29 0 .088.06.26.184.517l2.08 4.572 2.059-4.013c.137-.266.206-.471.206-.614 0-.313-.255-.478-.762-.498l-.36-.012c-.137 0-.206-.055-.206-.162v-.486l.047-.05c.894-.005 3.546 0 3.546 0l.048.05v.462c0 .095-.061.144-.184.149-.832.036-1.348.396-1.549 1.078l-2.778 5.397 2.079 4.759 3.95-10.236c.177-.471.267-.818.267-1.04 0-.326-.318-.498-.955-.51l-.465-.014c-.148 0-.222-.055-.222-.162v-.486l.047-.05c.741-.005 3.503 0 3.503 0l.048.05v.462c0 .1-.065.149-.196.149-.833.036-1.384.44-1.652 1.212L14.472 17.93c-.404.982-.808.982-1.212 0l-1.17-2.665z"/></svg>';
+
+function getImages(name) { return architectImages[name] || []; }
+function getLinks(name) {
+  let w = architectWiki[name];
+  if (w) return w;
+  for (const [k, v] of Object.entries(architectWiki)) {
+    if (name.includes(k) || k.includes(name.split(' / ')[0]) || k.includes(name.split(' / ').pop())) return v;
+  }
+  return null;
+}
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 function createCard(a) {
   const card = document.createElement('div');
   card.className = 'architect-card';
   card.dataset.era = a.era;
   card.dataset.search = [a.name, a.style, a.desc, ...a.works, ...a.awards, ...a.tags].join(' ').toLowerCase();
-
-  let awardsHtml = '';
-  if (a.awards.length > 0) {
-    awardsHtml = a.awards.map(aw => `<span class="tag tag-award">${aw}</span>`).join('');
+  const images = getImages(a.name);
+  const links = getLinks(a.name);
+  const hasImg = images.length > 0;
+  let imgHtml = hasImg
+    ? `<div class="card-img-wrap"><img class="card-img" src="${esc(images[0].src)}" alt="${esc(images[0].caption)}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="card-img-caption">${esc(images[0].caption)}</div></div>`
+    : '<div class="no-img"></div>';
+  let linksHtml = '';
+  if (links) {
+    let items = [];
+    if (links.en) items.push(`<a href="${links.en}" target="_blank" rel="noopener" title="Wikipedia (English)" class="link-w" onclick="event.stopPropagation()">${wikiSvg} EN</a>`);
+    if (links.hu) items.push(`<a href="${links.hu}" target="_blank" rel="noopener" title="Wikipedia (Magyar)" class="link-w" onclick="event.stopPropagation()">${wikiSvg} HU</a>`);
+    if (items.length) linksHtml = `<div class="card-links">${items.join('')}</div>`;
   }
-
+  let awardsHtml = a.awards.map(aw => `<span class="tag tag-award">${esc(aw)}</span>`).join('');
   let tagsHtml = a.tags.map(t => {
     let cls = 'tag-era';
-    if (t === 'international') cls = 'tag-intl';
-    if (t === 'organic') cls = 'tag-organic';
-    if (t === 'bauhaus') cls = 'tag-intl';
+    if (t==='international'||t==='bauhaus') cls='tag-intl';
+    if (t==='organic') cls='tag-organic';
     return `<span class="tag ${cls}">${t}</span>`;
   }).join('');
-
-  card.innerHTML = `
-    <div class="card-header">
-      <span class="card-name">${a.name}</span>
-      <span class="card-years">${a.years}</span>
-    </div>
-    <div class="card-style">${a.style}</div>
-    <div class="card-desc">${a.desc}</div>
-    ${a.works.length > 0 ? `
-    <div class="card-works">
-      <h4>Key Works</h4>
-      <ul>${a.works.map(w => `<li>${w}</li>`).join('')}</ul>
-    </div>` : ''}
-    <div class="card-tags">
-      ${awardsHtml}
-      ${tagsHtml}
-    </div>
-  `;
+  let galleryHtml = hasImg
+    ? `<div class="detail-gallery">${images.map(img => `<figure><img src="${esc(img.src)}" alt="${esc(img.caption)}" loading="lazy"><figcaption>${esc(img.caption)}</figcaption></figure>`).join('')}</div>`
+    : '';
+  card.innerHTML = `${imgHtml}<div class="card-body"><div class="card-header"><span class="card-name">${esc(a.name)}</span><span class="card-years">${esc(a.years)}</span></div><div class="card-style">${esc(a.style)}</div>${linksHtml}<div class="card-desc">${a.desc}</div>${a.works.length ? `<div class="card-works"><h4>Key Works</h4><ul>${a.works.map(w=>`<li>${esc(w)}</li>`).join('')}</ul></div>` : ''}<div class="card-tags">${awardsHtml}${tagsHtml}</div>${hasImg ? '<div class="expand-hint">▾ Click for building photos</div>' : ''}</div><div class="detail-section"><div class="detail-header"><h3>Buildings & Works</h3><button class="detail-close" onclick="event.stopPropagation();this.closest(\'.architect-card\').classList.remove(\'expanded\')">✕ Close</button></div>${galleryHtml || '<p class="detail-noimg">Building photos not yet available.</p>'}</div>`;
+  card.addEventListener('click', e => {
+    if (e.target.closest('.card-links')||e.target.closest('.detail-close')||e.target.closest('.detail-gallery a')) return;
+    if (card.classList.contains('expanded')) return;
+    document.querySelectorAll('.architect-card.expanded').forEach(c=>c.classList.remove('expanded'));
+    card.classList.add('expanded');
+    setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  });
   return card;
 }
 
-let currentFilter = 'all';
-let currentSearch = '';
-
+let currentFilter='all', currentSearch='';
 function render() {
   const container = document.getElementById('directory');
   container.innerHTML = '';
-  const searchLower = currentSearch.toLowerCase().trim();
-  let totalVisible = 0;
-
+  const q = currentSearch.toLowerCase().trim();
+  let total = 0;
   eraOrder.forEach(era => {
-    const eraArchitects = architects.filter(a => {
-      const matchesEra = currentFilter === 'all' || a.era === currentFilter || a.tags.includes(currentFilter);
-      const matchesSearch = !searchLower || a.name.toLowerCase().includes(searchLower) ||
-        a.style.toLowerCase().includes(searchLower) ||
-        a.desc.toLowerCase().includes(searchLower) ||
-        a.works.some(w => w.toLowerCase().includes(searchLower)) ||
-        a.awards.some(aw => aw.toLowerCase().includes(searchLower));
-      return a.era === era && matchesEra && matchesSearch;
-    });
-
-    if (eraArchitects.length === 0) return;
-
+    const filtered = architects.filter(a => a.era===era && (currentFilter==='all'||a.era===currentFilter||a.tags.includes(currentFilter)) && (!q||a.name.toLowerCase().includes(q)||a.style.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q)||a.works.some(w=>w.toLowerCase().includes(q))||a.awards.some(aw=>aw.toLowerCase().includes(q))));
+    if (!filtered.length) return;
     const section = document.createElement('div');
     section.className = 'era-section';
-    section.innerHTML = `
-      <h2 class="era-header">${eraNames[era] || era}</h2>
-      <p class="era-description">${eraDescriptions[era] || ''}</p>
-    `;
+    section.innerHTML = `<h2 class="era-header">${eraNames[era]||era}</h2><p class="era-description">${eraDescriptions[era]||''}</p>`;
     const grid = document.createElement('div');
     grid.className = 'card-grid';
-    eraArchitects.forEach(a => grid.appendChild(createCard(a)));
+    filtered.forEach(a=>grid.appendChild(createCard(a)));
     section.appendChild(grid);
     container.appendChild(section);
-    totalVisible += eraArchitects.length;
+    total += filtered.length;
   });
-
-  if (totalVisible === 0) {
-    container.innerHTML = '<div class="no-results">No architects found matching your search.</div>';
-  }
-
-  document.getElementById('results-count').textContent = `${totalVisible} architect${totalVisible !== 1 ? 's' : ''}`;
+  if (!total) container.innerHTML='<div class="no-results">No architects found matching your search.</div>';
+  document.getElementById('results-count').textContent = `${total} architect${total!==1?'s':''}`;
 }
-
-// Filter buttons
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     currentFilter = btn.dataset.filter;
     render();
   });
 });
-
-// Search
-document.getElementById('search').addEventListener('input', (e) => {
-  currentSearch = e.target.value;
-  render();
-});
-
-// Update total count
+document.getElementById('search').addEventListener('input', e => { currentSearch=e.target.value; render(); });
 document.getElementById('total-count').textContent = architects.length;
-
-// Initial render
 render();
+
 </script>
 </body>
 </html>

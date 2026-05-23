@@ -1,8 +1,16 @@
 # The Definitive Directory of Hungarian Architects
 
 > A comprehensive reference covering **200+ architects** who shaped Hungary's built environment — from 18th-century Classicism through Secession, Bauhaus, Socialist Modernism, Organic Architecture, and today's contemporary scene.
+>
+> 📸 **Now with building photographs** from Wikimedia Commons for 30+ key architects, clickable detail views, and Wikipedia links.
 
 *Compiled May 2026 · Names follow Hungarian order (family name first) where customary*
+
+🌐 **[Browse the interactive directory →](https://macat.github.io/hungarian-architects/)**
+- Building photos from Wikimedia Commons (CC-licensed)
+- Wikipedia links (Hungarian & English) for 49+ architects
+- Click any card to expand and see all building photographs
+- Search by architect name, building, style, or era
 
 ---
 
