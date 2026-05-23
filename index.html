@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hungarian Architects Directory — 200+ Architects from Three Centuries</title>
+<meta name="description" content="The definitive English-language directory of Hungarian architects. 200+ entries spanning Classicism, Secession, Bauhaus, Socialist Modernism, Organic Architecture, and Contemporary practice.">
+<style>
+:root {
+  --bg: #faf9f6;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #6b6b6b;
+  --accent: #b85c38;
+  --accent-light: #e8cfc0;
+  --border: #e5e1db;
+  --tag-bg: #f0ebe4;
+  --tag-text: #5c4a3a;
+  --hero-bg: #2c2c2c;
+  --hero-text: #faf9f6;
+  --search-bg: #ffffff;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero */
+.hero {
+  background: var(--hero-bg);
+  color: var(--hero-text);
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.hero .subtitle {
+  font-size: 1.15rem;
+  color: rgba(250,249,246,0.75);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+.hero .stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.hero .stat {
+  text-align: center;
+}
+.hero .stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.hero .stat-label {
+  font-size: 0.85rem;
+  color: rgba(250,249,246,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Controls */
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 400px;
+}
+.search-box input {
+  width: 100%;
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  background: var(--search-bg);
+  font-family: var(--font-body);
+  transition: border-color 0.2s;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.search-box::before {
+  content: "🔍";
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+}
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card-bg);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.filter-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.results-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+}
+
+/* Main content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Era sections */
+.era-section {
+  margin-bottom: 3rem;
+}
+.era-header {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+}
+.era-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Architect card */
+.architect-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+}
+.architect-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+.card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.card-years {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+.card-style {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  flex-grow: 1;
+}
+.card-works {
+  margin-bottom: 0.75rem;
+}
+.card-works h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.card-works ul {
+  list-style: none;
+  padding: 0;
+}
+.card-works li {
+  font-size: 0.85rem;
+  padding: 0.15rem 0;
+  color: var(--text);
+  position: relative;
+  padding-left: 1rem;
+}
+.card-works li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.tag-era {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+.tag-award {
+  background: #fef3c7;
+  color: #92400e;
+}
+.tag-intl {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.tag-organic {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Compact card for table entries */
+.compact-card {
+  padding: 1rem 1.25rem;
+}
+.compact-card .card-name { font-size: 1.05rem; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .controls { padding: 0.75rem 1rem; }
+  .container { padding: 1rem; }
+  .card-grid { grid-template-columns: 1fr; }
+  .hero { padding: 2.5rem 1.5rem 2rem; }
+  .hero .stats { gap: 1.5rem; }
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* Hidden utility */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Hungarian Architects Directory</h1>
+  <p class="subtitle">The definitive English-language guide to three centuries of Hungarian architecture — from Classicism to the contemporary cutting edge.</p>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num" id="total-count">209</div>
+      <div class="stat-label">Architects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Eras</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">300+</div>
+      <div class="stat-label">Years</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls" id="controls">
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search architects, buildings, styles..." autocomplete="off">
+  </div>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="pre-modern">Pre-Modern</button>
+  <button class="filter-btn" data-filter="secession">Secession</button>
+  <button class="filter-btn" data-filter="bauhaus">Bauhaus</button>
+  <button class="filter-btn" data-filter="international">International</button>
+  <button class="filter-btn" data-filter="socialist">Socialist Era</button>
+  <button class="filter-btn" data-filter="organic">Organic</button>
+  <button class="filter-btn" data-filter="transition">Transition</button>
+  <button class="filter-btn" data-filter="contemporary">Contemporary</button>
+  <span class="results-count" id="results-count"></span>
+</div>
+
+<div class="container" id="directory">
+  <!-- Generated by JS -->
+</div>
+
+<div class="footer">
+  <p>Compiled May 2026 · <a href="https://github.com/macat/hungarian-architects">GitHub</a> · Names follow Hungarian order (family name first) where customary</p>
+  <p style="margin-top:0.5rem">Sources: <a href="https://epiteszforum.hu">Építészfórum</a> · <a href="https://hu.wikipedia.org/wiki/Ybl_Mikl%C3%B3s-d%C3%ADj">Ybl Prize (Wikipedia)</a> · <a href="https://en.wikipedia.org/wiki/List_of_Hungarian_architects">Wikipedia</a> · <a href="https://mek.hu">Magyar Építész Kamara</a></p>
+</div>
+
+<script>
+
+const architects = [
+// === PRE-MODERN & HISTORICIST PIONEERS ===
+{name:"Jung József",years:"1734–1808",era:"pre-modern",style:"Late Baroque / Early Classicism",desc:"One of the earliest documented Hungarian architects, bridging Baroque and Classical periods.",works:["Church of St. Anne, Batthyány tér, Budapest"],awards:[],tags:["pre-modern"]},
+{name:"Pollack Mihály",years:"1773–1855",era:"pre-modern",style:"Neoclassicism",desc:"The father of Hungarian Classicism. His National Museum is one of Budapest's most iconic buildings and a symbol of Hungarian national identity.",works:["Hungarian National Museum, Budapest (1837–1847)","Sándor Palace, Buda Castle","Ludovica Academy"],awards:[],tags:["pre-modern"]},
+{name:"Hild József",years:"1789–1867",era:"pre-modern",style:"Neoclassicism",desc:"The most prolific architect of 19th-century Hungary — over 900 projects. Designed Pest's neoclassical cityscape. Began St. Stephen's Basilica. The Hild Prize bears his name.",works:["St. Stephen's Basilica (initial design)","Eger Cathedral","Gerbeaud House, Budapest"],awards:[],tags:["pre-modern"]},
+{name:"Reitter Ferenc",years:"1813–1874",era:"pre-modern",style:"Neoclassicism / Urban Engineering",desc:"City engineer who conceived the Grand Boulevard (Nagykörút) ring road — Budapest's defining urban structure.",works:["Budapest Grand Boulevard plan","Danube embankment regulation"],awards:[],tags:["pre-modern"]},
+{name:"Ybl Miklós",years:"1814–1891",era:"pre-modern",style:"Neo-Renaissance / Historicism",desc:"The greatest Hungarian architect of the 19th century. His Opera House rivals Vienna and Paris. Hungary's most prestigious architecture prize is named after him.",works:["Hungarian State Opera House, Budapest (1884)","St. Stephen's Basilica (completed)","Castle Bazaar, Budapest","Fővám tér Custom House"],awards:["Namesake of the Ybl Prize"],tags:["pre-modern"]},
+{name:"Steindl Imre",years:"1839–1902",era:"pre-modern",style:"Neo-Gothic",desc:"Creator of Hungary's most iconic building — the Parliament on the Danube. The largest building in Hungary and third-largest parliament in the world.",works:["Hungarian Parliament Building, Budapest (1885–1904)","Budapest University of Technology buildings"],awards:[],tags:["pre-modern"]},
+{name:"Schulek Frigyes",years:"1841–1919",era:"pre-modern",style:"Neo-Gothic / Neo-Romanesque",desc:"Transformed the Buda Castle district into a fairy-tale medieval quarter. The Fisherman's Bastion is one of Budapest's most photographed landmarks.",works:["Fisherman's Bastion, Budapest (1895–1902)","Matthias Church restoration, Budapest"],awards:[],tags:["pre-modern"]},
+{name:"Hauszmann Alajos",years:"1847–1926",era:"pre-modern",style:"Neo-Baroque / Eclectic",desc:"Royal architect who transformed Buda Castle into the grand Habsburg palace. His New York Palace café became legendary.",works:["Buda Castle Palace expansion (1896–1905)","Palace of Justice (now Ethnographic Museum)","New York Palace, Budapest"],awards:[],tags:["pre-modern"]},
+{name:"Czigler Győző",years:"1850–1905",era:"pre-modern",style:"Eclecticism / Neo-Renaissance",desc:"Designed Budapest's iconic Central Market Hall, one of the city's most beloved buildings.",works:["Central Market Hall, Fővám tér, Budapest"],awards:[],tags:["pre-modern"]},
+{name:"Pecz Samu",years:"1854–1922",era:"pre-modern",style:"Neo-Gothic",desc:"Leading Neo-Gothic architect who also worked on industrial and educational buildings.",works:["Reformed Church, Szilágyi Dezső tér, Budapest","Budapest University of Technology"],awards:[],tags:["pre-modern"]},
+{name:"Alpár Ignác",years:"1855–1928",era:"pre-modern",style:"Eclecticism / Historicism",desc:"Created the fantastical Vajdahunyad Castle — originally temporary for 1896 Millennium Exhibition, rebuilt in stone due to popularity.",works:["Vajdahunyad Castle, City Park, Budapest (1896–1908)","National Bank of Hungary, Szabadság tér","Budapest Stock Exchange"],awards:[],tags:["pre-modern"]},
+{name:"Baumhorn Lipót",years:"1860–1932",era:"pre-modern",style:"Art Nouveau / Eclecticism",desc:"Europe's most prolific synagogue architect — over 20 across Central Europe. His Szeged Synagogue is among Hungary's most beautiful religious buildings.",works:["Szeged Synagogue (1903)","Subotica Synagogue (1902)","20+ synagogues across Central Europe"],awards:[],tags:["pre-modern"]},
+{name:"Korb Flóris",years:"1860–1930",era:"pre-modern",style:"Eclecticism / Secession",desc:"Half of the famous Korb & Giergl partnership. The Gresham Palace (now Four Seasons Hotel) is their masterpiece.",works:["Klotild Palaces, Budapest","Palace of Art (Műcsarnok), Budapest","Gresham Palace (with Giergl)"],awards:[],tags:["pre-modern"]},
+{name:"Quittner Zsigmond",years:"1859–1918",era:"pre-modern",style:"Eclecticism / Neo-Baroque",desc:"Designed the original Gresham Palace façade, one of Budapest's most opulent Art Nouveau landmarks.",works:["Gresham Palace (original design)","Tőzsdepalota"],awards:[],tags:["pre-modern"]},
+{name:"Schickedanz Albert",years:"1846–1915",era:"pre-modern",style:"Eclecticism / Neo-Classicism",desc:"Designed Heroes' Square — Hungary's most important national memorial and UNESCO World Heritage Site.",works:["Museum of Fine Arts, Budapest (1906)","Heroes' Square colonnade","Millennium Underground entrance"],awards:[],tags:["pre-modern"]},
+{name:"Pfaff Ferenc",years:"1851–1913",era:"pre-modern",style:"Eclecticism",desc:"Hungary's premier railway architect. Keleti Station's grand façade is a Budapest landmark.",works:["Budapest Keleti Railway Station (1884)","Szeged Railway Station"],awards:[],tags:["pre-modern"]},
+{name:"Rochlitz Gyula",years:"1825–1886",era:"pre-modern",style:"Historicism",desc:"Prolific builder who shaped the streetscape of inner Pest during the great building boom.",works:["Residential and commercial buildings in Pest"],awards:[],tags:["pre-modern"]},
+
+// === SECESSION & ART NOUVEAU ===
+{name:"Lechner Ödön",years:"1845–1914",era:"secession",style:"Hungarian Secession / Art Nouveau",desc:"The 'Hungarian Gaudí' — creator of a uniquely Hungarian architectural language combining Art Nouveau with Magyar folk motifs and Zsolnay ceramics. Perhaps the most original Hungarian architect ever.",works:["Museum of Applied Arts, Budapest (1896)","Geological Institute, Budapest (1899)","Postal Savings Bank, Budapest (1901)","Cifrapalota, Kecskemét","Town Hall, Kecskemét"],awards:[],tags:["secession"]},
+{name:"Lajta Béla",years:"1873–1920",era:"secession",style:"Secession → Proto-Modernism",desc:"Started in Lechner's Secession style but evolved toward proto-modern geometric language. The Rózsavölgyi Building is a precursor to Art Deco. Died young but left an outsized legacy.",works:["Rózsavölgyi Building, Budapest (1912)","Parisiana Entertainment Hall","Schmidl Family Tomb, Kozma Street Cemetery"],awards:[],tags:["secession"]},
+{name:"Kós Károly",years:"1883–1977",era:"secession",style:"Hungarian National Romanticism / Arts & Crafts",desc:"Architect, writer, graphic artist, political figure. Champion of Transylvanian Hungarian identity through architecture. The Kós Károly Lifetime Achievement Award is named after him.",works:["Budapest Zoo entrance buildings (1912)","Wekerle Estate, Budapest","Churches in Transylvania","Sepsiszentgyörgy National Theater"],awards:["Namesake of Kós Károly Award"],tags:["secession"]},
+{name:"Magyar Ede",years:"1877–1912",era:"secession",style:"Hungarian Secession",desc:"Died at 35 but left behind the Reök Palace — one of the most exuberant Art Nouveau buildings in Europe.",works:["Reök Palace, Szeged (1907)","Palace of Culture, Marosvásárhely/Târgu Mureș"],awards:[],tags:["secession"]},
+{name:"Medgyaszay István",years:"1877–1959",era:"secession",style:"Hungarian Secession / Reinforced Concrete Pioneer",desc:"Pioneered reinforced concrete with Hungarian folk-art decorative forms. Combined technological innovation with national identity.",works:["Veszprém Theater (1908)","Sopron Theater","Rárós reinforced-concrete church"],awards:[],tags:["secession"]},
+{name:"Árkay Aladár",years:"1868–1932",era:"secession",style:"Secession → Early Modernism",desc:"Bridged Art Nouveau and early Modernism. His son Bertalan continued his work.",works:["Fasori Evangelical Church, Budapest"],awards:[],tags:["secession"]},
+{name:"Árkay Bertalan",years:"1901–1971",era:"secession",style:"Modern Ecclesiastical Architecture",desc:"Created Hungary's earliest modernist sacred architecture. The Városmajor Church is a landmark.",works:["Városmajor Church, Budapest (1933)"],awards:[],tags:["secession"]},
+{name:"Györgyi Dénes",years:"1886–1961",era:"secession",style:"National Romanticism / Folk-inspired Modernism",desc:"Continued the national romantic tradition into the interwar period, designing exhibition pavilions representing Hungary abroad.",works:["Hungarian pavilions at international exhibitions","Residential villas"],awards:[],tags:["secession"]},
+{name:"Toroczkai Wigand Ede",years:"1869–1945",era:"secession",style:"Transylvanian Folk / National Romanticism",desc:"Key figure in the Hungarian folk revival in architecture — buildings inspired by Transylvanian and Székely folk traditions.",works:["Wekerle Estate buildings, Budapest","Residential villas in Buda"],awards:[],tags:["secession"]},
+{name:"Vágó József",years:"1877–1947",era:"secession",style:"Secession / Early Modernism",desc:"Part of the Vágó brothers who represented Hungary's Secession internationally. Later involved in urban planning.",works:["Ministry of Finance, Budapest","Residential buildings"],awards:[],tags:["secession"]},
+
+// === BAUHAUS & EARLY MODERNISM ===
+{name:"Molnár Farkas",years:"1897–1945",era:"bauhaus",style:"Bauhaus / International Style",desc:"The most important Bauhaus architect working in Hungary. Studied under Gropius and Breuer. The Napraforgó Street experimental housing is his masterpiece. Works at MoMA. Died during the Siege of Budapest.",works:["Red Cube House (Bauhaus, 1922)","Napraforgó Street houses, Budapest (1931)","Lejtő Street apartment buildings","Co-founded CIAM Hungarian group"],awards:[],tags:["bauhaus"]},
+{name:"Fischer József",years:"1901–1995",era:"bauhaus",style:"Bauhaus / Functionalism",desc:"Leading Hungarian Bauhaus practitioner. His Budaörs Airport terminal was the most modern building in Hungary at completion.",works:["Napraforgó Street houses, Budapest (1931)","Atrium Cinema, Budapest (1936)","Budapest Airport terminal, Budaörs (1937)"],awards:[],tags:["bauhaus"]},
+{name:"Ligeti Pál",years:"1885–1941",era:"bauhaus",style:"Modernism",desc:"Part of the pioneering trio (with Molnár and Fischer) who brought international modernism to Budapest.",works:["Napraforgó Street houses, Budapest","OTI Hospital, Budapest"],awards:[],tags:["bauhaus"]},
+{name:"Preisich Gábor",years:"1909–1998",era:"bauhaus",style:"Modernism / Urban Planning",desc:"Architect and influential urban planner who shaped post-war Budapest's development. Author of important architectural histories.",works:["Budapest urban planning masterworks"],awards:["Ybl Prize (1962)"],tags:["bauhaus"]},
+{name:"Kozma Lajos",years:"1884–1948",era:"bauhaus",style:"Art Deco / Modernism",desc:"Leading figure in Hungarian Art Deco and furniture design. Bridge between decorative arts and modern architecture.",works:["Residential interiors and furniture","Budapest townhouses"],awards:[],tags:["bauhaus"]},
+{name:"Rimanóczy Gyula",years:"1903–1958",era:"bauhaus",style:"Modernism",desc:"Leading modernist of the immediate post-war period. His stripped-classical-to-modernist style defined many institutional buildings.",works:["Hotel Budapest","Ministry of Interior building"],awards:["Ybl Prize (1953)"],tags:["bauhaus"]},
+{name:"Lauber Dezső",years:"1879–1966",era:"bauhaus",style:"Eclecticism → Modernism",desc:"Also notable as Hungary's first Olympic swimmer. Combined athletic and architectural careers.",works:["Sports facilities"],awards:[],tags:["bauhaus"]},
+{name:"Weiner Tibor",years:"1906–1965",era:"bauhaus",style:"Bauhaus / Modernism",desc:"Studied at the Bauhaus under Hannes Meyer. Emigrated to Chile, then returned to plan Hungary's first socialist new town — Dunaújváros.",works:["Dunaújváros (Sztálinváros) city planning"],awards:["Ybl Prize (1953)"],tags:["bauhaus"]},
+{name:"Kotsis Iván",years:"1889–1980",era:"bauhaus",style:"Modernism / Neoclassicism",desc:"Influential professor at Budapest University of Technology who trained generations of architects.",works:["University buildings","Residential villas"],awards:["Ybl Prize (1961)"],tags:["bauhaus"]},
+
+// === HUNGARIAN-BORN INTERNATIONAL GIANTS ===
+{name:"Breuer Marcel / Marcel Breuer",years:"1902–1981",era:"international",style:"Bauhaus / International Style / Brutalism",desc:"Born in Pécs, Hungary. One of the 20th century's most influential architects and designers. His Wassily Chair revolutionized furniture. The Whitney Museum is an icon. Directly relevant to Hungarian renovation aesthetics.",works:["Wassily Chair (1925)","Cesca Chair (1928)","UNESCO Headquarters, Paris (1958)","Whitney Museum, NYC (1966)","IBM Research Center, La Gaude"],awards:["AIA Gold Medal (1968)"],tags:["international","bauhaus"]},
+{name:"Moholy-Nagy László / László Moholy-Nagy",years:"1895–1946",era:"international",style:"Bauhaus / Constructivism / New Vision",desc:"Born in Bácsborsód. Polymath who profoundly influenced modern design, photography, and art education. Founded the New Bauhaus in Chicago.",works:["Bauhaus light-space modulator","New Bauhaus / IIT Institute of Design, Chicago"],awards:[],tags:["international","bauhaus"]},
+{name:"Goldfinger Ernő / Ernő Goldfinger",years:"1902–1987",era:"international",style:"Brutalism / Modernism",desc:"Budapest-born, became one of Britain's most prominent Brutalists. Ian Fleming named his Bond villain after him. His Hampstead house is a National Trust property.",works:["Trellick Tower, London (1972)","Balfron Tower, London (1967)","2 Willow Road, Hampstead, London"],awards:[],tags:["international"]},
+{name:"Wank Roland / Roland Wank",years:"1898–1970",era:"international",style:"Modernism / Industrial Architecture",desc:"Led the architectural design of the entire TVA dam program — one of America's largest public works projects.",works:["TVA Norris Dam (1936)","Multiple TVA dam complexes"],awards:[],tags:["international"]},
+{name:"László Pál / Paul László",years:"1900–1993",era:"international",style:"Hollywood Modernism",desc:"'Architect to the Stars' in Beverly Hills — designed homes for Hollywood elite.",works:["Beverly Hills residential estates","Celebrity homes in Los Angeles"],awards:[],tags:["international"]},
+{name:"Hudec László / László Hudec",years:"1893–1958",era:"international",style:"Art Deco / Modernism",desc:"After escaping a Siberian POW camp in WWI, became Shanghai's most important architect. His Park Hotel was tallest in Asia.",works:["Park Hotel, Shanghai (1934)","Grand Theatre, Shanghai","60+ buildings in Shanghai"],awards:[],tags:["international"]},
+{name:"Vecsei Éva / Eva Vecsei",years:"born 1930",era:"international",style:"Modernism",desc:"Fled Hungary in 1956, became a major figure in Canadian modernism at ARCOP Associates in Montreal.",works:["Place Bonaventure, Montreal (with Affleck)"],awards:[],tags:["international"]},
+{name:"Kaufmann Oszkár / Oskar Kaufmann",years:"1873–1956",era:"international",style:"Expressionism / Modernism",desc:"Leading theater architect of Weimar-era Berlin. Designed many of Berlin's most important theaters.",works:["Hebbeltheater, Berlin","Volksbühne renovation, Berlin","Renaissance-Theater, Berlin"],awards:[],tags:["international"]},
+{name:"Rubik Ernő / Ernő Rubik",years:"born 1944",era:"international",style:"Architecture / Industrial Design",desc:"Yes, the Rubik's Cube inventor is a trained architect — professor at Budapest University of Technology who designed the cube as a spatial-thinking teaching tool.",works:["Rubik's Cube (1974)","Architectural teaching, BME"],awards:[],tags:["international"]},
+
+// === SOCIALIST ERA ===
+{name:"Nyiri István",years:"1907–1976",era:"socialist",style:"Socialist Realism / Modernism",desc:"Designer of the Népstadion — Hungary's national stadium from 1953 until demolition in 2016.",works:["Népstadion (People's Stadium), Budapest (1953)"],awards:["Ybl Prize (1953)"],tags:["socialist"]},
+{name:"Gádoros Lajos",years:"1910–1996",era:"socialist",style:"Socialist Modernism",desc:"Among the earliest Ybl Prize winners, representing the transitional generation.",works:["Housing estates","Institutional buildings"],awards:["Ybl Prize (1953, 1958)"],tags:["socialist"]},
+{name:"id. Janáky István",years:"1901–1966",era:"socialist",style:"Modernism / Socialist Realism",desc:"First-generation Ybl Prize winner who trained the next generation.",works:["Institutional buildings"],awards:["Ybl Prize (1953)"],tags:["socialist"]},
+{name:"Farkasdy Zoltán",years:"1923–1989",era:"socialist",style:"Modernism",desc:"Leading figure in socialist-era institutional architecture.",works:["University buildings","Cultural centers"],awards:["Ybl Prize (1963, 1973)"],tags:["socialist"]},
+{name:"Jánossy György",years:"1922–2001",era:"socialist",style:"Modernism",desc:"Designer of major hotels and cultural buildings during the Kádár era.",works:["Hotel Duna Intercontinental, Budapest"],awards:["Ybl Prize (1965, 1982)"],tags:["socialist"]},
+{name:"Finta József",years:"1935–2020",era:"socialist",style:"Late Modernism / Postmodernism",desc:"One of the most prolific Hungarian architects of the 20th century. Hotels defined Budapest's modern skyline. Son Sándor co-founded sporaarchitects.",works:["Hotel Marriott Budapest (1969)","Déli Railway Station, Budapest (1975)","Hotel Atrium Hyatt, Budapest (1982)","Metro stations"],awards:["Ybl Prize (1965, 1972)","Kossuth Prize"],tags:["socialist"]},
+{name:"Csaba László",years:"1924–1995",era:"socialist",style:"Modernism",desc:"Leading figure bridging multiple eras in Hungarian architecture.",works:["Székesfehérvár cultural buildings"],awards:["Ybl Prize (1958, 1988)"],tags:["socialist"]},
+{name:"Major Máté",years:"1904–1986",era:"socialist",style:"Architectural Theory",desc:"More influential as theorist and educator. His books shaped Hungarian architectural thinking for decades.",works:["Theoretical writings","University teaching"],awards:["Ybl Prize (1960)"],tags:["socialist"]},
+{name:"Menyhárd István",years:"1902–1969",era:"socialist",style:"Structural Engineering / Modernism",desc:"Pioneer of thin-shell concrete structures in Hungary. His engineering enabled dramatic architectural forms.",works:["Budapest Sports Hall roof","Industrial structures"],awards:["Ybl Prize (1961)"],tags:["socialist"]},
+{name:"Hofer Miklós",years:"1923–2011",era:"socialist",style:"Modernism / University Architecture",desc:"Leading academic architect who shaped architectural education.",works:["University buildings","Educational facilities"],awards:["Ybl Prize (1964, 1978)"],tags:["socialist"]},
+{name:"Pomsár János",years:"1921–2004",era:"socialist",style:"Modernism",desc:"Major institutional architect contributing to Budapest's modernist fabric.",works:["Hotel Intercontinental (with Jánossy)"],awards:["Ybl Prize (1966, 1985)"],tags:["socialist"]},
+{name:"Reimholz Péter",years:"1938–2016",era:"socialist",style:"Modernism / High-Tech",desc:"One of the very few triple Ybl Prize winners — sustained excellence over decades.",works:["Technical University buildings","Industrial architecture"],awards:["Ybl Prize (1975, 1988, 1994)"],tags:["socialist"]},
+{name:"Callmeyer Ferenc",years:"1913–2005",era:"socialist",style:"Modernism",desc:"Spanning four decades of Ybl Prize recognition — continuity through massive political changes.",works:["Residential and institutional buildings"],awards:["Ybl Prize (1956, 1993)"],tags:["socialist"]},
+{name:"Polónyi Károly",years:"1928–2002",era:"socialist",style:"Modernism / Urban Planning",desc:"Important urban planner who shaped Budapest's post-war residential areas.",works:["Budapest residential districts"],awards:["Ybl Prize (1961)"],tags:["socialist"]},
+{name:"Hajós Alfréd",years:"1878–1955",era:"socialist",style:"Eclecticism / Early Modernism",desc:"Hungary's first Olympic champion (Athens 1896, swimming) who became an architect. Also won silver at 1924 Paris Olympics — in architecture!",works:["National Swimming Complex, Margitsziget"],awards:["Ybl Prize (2010, posthumous)","Olympic Gold (1896)"],tags:["socialist","pre-modern"]},
+{name:"Bán Ferenc",years:"born 1940",era:"socialist",style:"Late Modernism / Postmodernism",desc:"Important figure in the transition from late socialist to post-communist architecture.",works:["Residential and institutional projects"],awards:["Ybl Prize (1986)"],tags:["socialist"]},
+{name:"Heim Ernő",years:"1890–1975",era:"socialist",style:"Modernism",desc:"Maintained modernist standards through the Socialist Realist period.",works:["Industrial and institutional buildings"],awards:["Ybl Prize (1956, 1971)"],tags:["socialist"]},
+{name:"Pintér Béla",years:"1913–1989",era:"socialist",style:"Modernism",desc:"Consistent contributor to Hungary's built environment across decades.",works:["Institutional buildings","Cultural centers"],awards:["Ybl Prize (1958, 1978)"],tags:["socialist"]},
+{name:"Virág Csaba",years:"1925–2009",era:"socialist",style:"Modernism",desc:"Important industrial architect of the socialist era. Double Ybl Prize winner.",works:["Industrial and institutional buildings"],awards:["Ybl Prize (1968, 1973)"],tags:["socialist"]},
+{name:"Mikolás Tibor",years:"1922–2002",era:"socialist",style:"Modernism",desc:"Prolific architect of the Kádár era's institutional building program.",works:["Institutional and commercial buildings"],awards:["Ybl Prize (1961, 1970)"],tags:["socialist"]},
+{name:"Szendrői Jenő",years:"1913–2007",era:"socialist",style:"Modernism / Industrial Architecture",desc:"Pioneer of industrial architecture and engineering structures in Hungary.",works:["Industrial buildings"],awards:["Ybl Prize (1955)"],tags:["socialist"]},
+{name:"Winkler Oszkár",years:"1907–1984",era:"socialist",style:"Modernism",desc:"First-generation Ybl Prize winner who maintained modernist principles.",works:["Various buildings"],awards:["Ybl Prize (1953)"],tags:["socialist"]},
+{name:"Magyar Géza",years:"1914–1998",era:"socialist",style:"Modernism",desc:"Double Ybl Prize winner representing sustained excellence.",works:["Institutional buildings"],awards:["Ybl Prize (1963, 1981)"],tags:["socialist"]},
+{name:"Hajnóczi Gyula",years:"1920–1996",era:"socialist",style:"Architectural Theory",desc:"Important architectural theorist and historian at the Budapest University of Technology.",works:["Academic writings"],awards:["Ybl Prize (1968)"],tags:["socialist"]},
+{name:"Granasztói Pál",years:"1908–1985",era:"socialist",style:"Urban Planning / Architectural Writing",desc:"Architectural writer and urban theorist whose books shaped public understanding of architecture.",works:["Architectural writings"],awards:["Ybl Prize (1969)"],tags:["socialist"]},
+{name:"Szrogh György",years:"1915–1999",era:"socialist",style:"Modernism",desc:"Double Ybl Prize winner and university professor. Bridged academic and practical worlds.",works:["University buildings"],awards:["Ybl Prize (1953, 1967)"],tags:["socialist"]},
+
+// === ORGANIC ARCHITECTURE ===
+{name:"Makovecz Imre",years:"1935–2011",era:"organic",style:"Hungarian Organic Architecture",desc:"Hungary's most internationally recognized 20th-century architect. Created uniquely Hungarian organic architecture from Transylvanian folk traditions, anthroposophy, and natural forms. Controversial and outspoken — both celebrated and polarizing.",works:["Paks Catholic Church (1990)","Seville Expo Hungarian Pavilion (1992)","Stephaneum, Piliscsaba","Bak Community Center","Visegrád Hotel Silvanus"],awards:["Ybl Prize (1969)","Kossuth Prize"],tags:["organic"]},
+{name:"Csete György",years:"1937–2016",era:"organic",style:"Hungarian Organic Architecture",desc:"Co-founder of the Pécs Group. Developed organic architecture rooted in Hungarian nomadic traditions. His yurt-inspired buildings reference original Hungarian dwelling forms.",works:["Csete Chapel, Pázmánd","Yurt-shaped buildings","Balaton holiday homes"],awards:["Ybl Prize (1992)"],tags:["organic"]},
+{name:"Ekler Dezső",years:"born 1951",era:"organic",style:"Organic / Deconstructivism",desc:"Part of the Makovecz-adjacent organic movement with more deconstructivist leanings. Important theorist and practitioner.",works:["Sárospatak Cultural Center","Csongrád buildings"],awards:["Ybl Prize (1994)"],tags:["organic"]},
+{name:"Janáky István",years:"1943–2013",era:"organic",style:"Organic / Late Modernism",desc:"Son of id. Janáky István. Carried forward the organic tradition while engaging with international discourse.",works:["Public buildings","Competition designs"],awards:["Ybl Prize (1990)"],tags:["organic"]},
+{name:"Turányi Gábor",years:"born 1951",era:"organic",style:"Contextual Modernism",desc:"Founded T2.a Architects. Bridges organic tradition and contemporary European modernism. Budapest residential work notable for contextual sensitivity.",works:["Simplon residential buildings, Budapest"],awards:["Ybl Prize (1984)","Pro Architectura (2010)"],tags:["organic","transition"]},
+
+// === TRANSITION GENERATION ===
+{name:"Zoboki Gábor",years:"born 1950",era:"transition",style:"High-Tech / Contemporary",desc:"Founder of ZDA (Zoboki Design and Architecture). One of Hungary's most commercially successful contemporary firms.",works:["National Dance Theater, Budapest","Richter Gedeon Research Center","CET Building, Budapest"],awards:["Ybl Prize (2008)","Pro Architectura (2011)"],tags:["transition"]},
+{name:"Ferencz István",years:"born 1947",era:"transition",style:"Late Modernism / Contemporary",desc:"Received Hungary's highest architecture honor in 2024 — the Kós Károly Lifetime Achievement Award. 'Nation's artist.'",works:["Institutional buildings"],awards:["Ybl Prize (1985)","Kós Károly Lifetime Award (2024)"],tags:["transition"]},
+{name:"Gereben Gábor",years:"born 1949",era:"transition",style:"Contextual Modernism",desc:"Co-founder of Gereben Marián Architects, one of Hungary's most respected firms.",works:["AÉS Wine Terrace, Eger"],awards:["Ybl Prize (1991)"],tags:["transition"]},
+{name:"Marián Balázs",years:"born 1959",era:"transition",style:"Contextual Modernism",desc:"Partner at Gereben Marián. Known for work respectfully engaging with historical contexts.",works:["AÉS Wine Terrace, Eger","Heritage restoration projects"],awards:["Ybl Prize (2019)","Pro Architectura (2016)"],tags:["transition"]},
+{name:"Cságoly Ferenc",years:"born 1950",era:"transition",style:"Academic Modernism / Heritage",desc:"Influential academic and practitioner. University professor shaping contemporary architectural education.",works:["University buildings","Heritage reconstruction"],awards:["Ybl Prize (1993)"],tags:["transition"]},
+{name:"Rajk László Jr.",years:"1949–2019",era:"transition",style:"Alternative Architecture / Exhibition Design",desc:"Son of executed politician. Used design as political resistance — his temporary structures for the democratic opposition were acts of architectural dissidence.",works:["1989 Opposition exhibition design","Samizdat architecture"],awards:[],tags:["transition"]},
+{name:"Dévényi Sándor",years:"born 1946",era:"transition",style:"Late Modernism",desc:"Second recipient of the Kós Károly Lifetime Achievement Award.",works:["Institutional and commercial buildings"],awards:["Ybl Prize (1988)","Kós Károly Lifetime Award (2023)"],tags:["transition"]},
+{name:"Balázs Mihály",years:"born 1948",era:"transition",style:"Contemporary",desc:"Most recent Kós Károly laureate (2025).",works:["Institutional buildings","Cultural facilities"],awards:["Ybl Prize (1995)","Kós Károly Lifetime Award (2025)"],tags:["transition"]},
+{name:"Ferkai András",years:"born 1953",era:"transition",style:"Architectural History / Heritage",desc:"Hungary's foremost architectural historian, specializing in Budapest's modernist heritage. Author of definitive works on Buda and Pest architecture.",works:["Scholarly publications"],awards:["Ybl Prize (2002)"],tags:["transition"]},
+{name:"Vikár András",years:"born 1959",era:"transition",style:"Contemporary / High-Tech",desc:"One of the most consistently awarded Hungarian architects. Co-founder of Vikár & Lukács.",works:["Graphisoft Park 'M' Building, Budapest","Népliget Center, Budapest","Kőbányai Client Service Center"],awards:["Ybl Prize (2006)","Pro Architectura (2009, 2010, 2018)"],tags:["transition"]},
+{name:"Lukács István",years:"born 1958",era:"transition",style:"Contemporary",desc:"Partner in Vikár & Lukács. Multiple Pro Architectura prize-winning projects.",works:["Graphisoft Park 'M' Building","Kőbányai Client Service Center"],awards:["Ybl Prize (2008)","Pro Architectura (2009, 2010, 2018)"],tags:["transition"]},
+{name:"Gunther Zsolt",years:"born 1959",era:"transition",style:"Contemporary Modernism",desc:"Represents the generation that established contemporary Hungarian practice after the transition.",works:["Residential and commercial projects"],awards:["Ybl Prize (2005)"],tags:["transition"]},
+{name:"Csomay Zsófia",years:"born 1949",era:"transition",style:"Late Modernism / Contemporary",desc:"One of Hungary's most prominent women architects. Her residential work shows particular sensitivity to landscape.",works:["Völgyikúti House, Veszprém"],awards:["Ybl Prize (1986)","Pro Architectura (2009)"],tags:["transition"]},
+{name:"Golda János",years:"born 1950s",era:"transition",style:"Heritage Restoration",desc:"Leading heritage restoration architect.",works:["Piarista Központ reconstruction, Budapest"],awards:["Ybl Prize (2000)","Pro Architectura (2013)"],tags:["transition"]},
+{name:"Bachman Zoltán",years:"1929–2012",era:"transition",style:"Modernism / Academic",desc:"Important professor and practitioner in Pécs, shaping the next generation.",works:["University of Pécs campus buildings"],awards:["Ybl Prize (1987)"],tags:["transition"]},
+{name:"Dávid Károly",years:"1929–2006",era:"transition",style:"Modernism",desc:"Important enough for a posthumous Ybl Prize — recognizing a career underappreciated in his lifetime.",works:["Various buildings"],awards:["Ybl Prize (2010, posthumous)"],tags:["transition"]},
+{name:"Nemes Roland",years:"born 1950",era:"transition",style:"Modernism / Postmodernism",desc:"Active in the post-transition period, contributing to Hungary's new institutional architecture.",works:["Institutional buildings"],awards:["Ybl Prize (1991)"],tags:["transition"]},
+{name:"Kulcsár Attila",years:"born 1940s",era:"transition",style:"Modernism / Contemporary",desc:"DLA architect active in the transitional period.",works:["Various projects"],awards:["Ybl Prize (1990)"],tags:["transition"]},
+{name:"Földes László",years:"born 1959",era:"transition",style:"Contemporary Modernism",desc:"Part of the post-1989 generation reshaping Hungarian architecture.",works:["Residential and institutional buildings"],awards:["Ybl Prize (2006)"],tags:["transition"]},
+{name:"Eleőd Ákos",years:"born 1961",era:"transition",style:"Contemporary / Heritage",desc:"Noted for sensitive heritage interventions and interior architecture.",works:["Interior and heritage restoration"],awards:["Ybl Prize (2012)"],tags:["transition"]},
+{name:"Krizsán András",years:"born 1960",era:"transition",style:"Contemporary",desc:"Founder of MODUM Architecture. Active in public and cultural architecture.",works:["Zánka New Generation Center"],awards:["Ybl Prize (2012)","Pro Architectura (2013)"],tags:["transition"]},
+{name:"Déry Attila",years:"born 1950s",era:"transition",style:"Architectural History / Heritage",desc:"Important architectural historian and heritage specialist.",works:["Scholarly publications"],awards:["Ybl Prize (2006)"],tags:["transition"]},
+
+// === CONTEMPORARY ===
+{name:"Sporaarchitects (Dékány, Finta S., Hatvani, Vadász O.)",years:"est. 2002",era:"contemporary",style:"Contemporary / Parametric",desc:"Perhaps Hungary's most internationally recognized contemporary firm. Their Metro 4 station designs were a breakthrough. Wallpaper* named them one of 30 most exciting firms globally. Finta Sándor is son of Finta József.",works:["M4 Metro: Szent Gellért tér station","M4 Metro: Fővám tér station"],awards:["Wallpaper* Architects Directory 2010"],tags:["contemporary"]},
+{name:"3h Architecture",years:"est. 1994",era:"contemporary",style:"Sustainable Modernism",desc:"Long-established Budapest firm known for integrating sustainable principles with bold geometry.",works:["Vibrant Geometry office building, Budapest"],awards:["Multiple international sustainability awards"],tags:["contemporary"]},
+{name:"BORD Architectural Studio (Bordás Péter)",years:"est. 2006",era:"contemporary",style:"Landscape-Integrated Architecture",desc:"Known for buildings that merge with landscape. Winery and agricultural projects notable for how architecture serves the land.",works:["Moonvalley Winery","BudaPres Cider Manor","Museum projects"],awards:["Ybl Prize (Bordás, 2023)","A' Design Award"],tags:["contemporary"]},
+{name:"Archikon Architects",years:"active",era:"contemporary",style:"Contemporary / Public Architecture",desc:"One of Budapest's most prominent firms for public and cultural architecture.",works:["Zöldike Nursery, Budapest","Millennium House, Budapest","Vizafogó Park & Pavilion"],awards:["Budapest Architecture Award 2022"],tags:["contemporary"]},
+{name:"PALATIUM Studio",years:"active",era:"contemporary",style:"Contemporary / Transportation",desc:"Alongside sporaarchitects, responsible for Budapest's Metro 4 — the largest contemporary architectural project in Hungary.",works:["M4 Metro stations, Budapest"],awards:[],tags:["contemporary"]},
+{name:"Hetedik Műterem / Szabó Levente",years:"active",era:"contemporary",style:"Contemporary",desc:"One of the most consistently awarded contemporary firms. Szabó Levente is among the most recognized architects of his generation.",works:["Normafa Ski House reconstruction, Budapest","Népliget Center (with Vikár)"],awards:["Ybl Prize (Szabó, 2018)","Pro Architectura (2010, 2016, 2024)"],tags:["contemporary"]},
+{name:"CAN Architects (Köninger, Cseh, Élő, Tátrai, Németh D.)",years:"active",era:"contemporary",style:"Contemporary / Educational",desc:"Emerging firm recognized for innovative educational architecture.",works:["Bazalt School"],awards:["Pro Architectura (2024)"],tags:["contemporary"]},
+{name:"Ferencz Marcel",years:"born 1972",era:"contemporary",style:"Contemporary / Sustainable",desc:"Son of Ferencz István. Focus on sustainable architecture and energy-efficient design.",works:["Hun Spa, Bodrogkeresztúr","DEM Energy Demo Center, Debrecen"],awards:["Ybl Prize (2013)","Pro Architectura (2009, 2020)"],tags:["contemporary"]},
+{name:"Bachmann Bálint",years:"born 1973",era:"contemporary",style:"Contemporary / Academic",desc:"Active in Pécs — the Breuer birthplace. Academic architect contributing to southern Hungary.",works:["University buildings in Pécs"],awards:["Ybl Prize (2013)"],tags:["contemporary"]},
+{name:"Hőnich Richárd",years:"born 1970s",era:"contemporary",style:"Heritage / Contemporary",desc:"Known for sensitive heritage restoration with contemporary interventions.",works:["Mád Rákóczi-Aspremont manor"],awards:["Ybl Prize (2011)","Pro Architectura (2010, 2018)"],tags:["contemporary"]},
+{name:"Erhardt Gábor",years:"born 1970s",era:"contemporary",style:"Heritage / Contemporary",desc:"Specializes in heritage restoration in Hungary's wine regions.",works:["Mád Rákóczi-Aspremont manor"],awards:["Ybl Prize (2021)","Pro Architectura (2018)"],tags:["contemporary"]},
+{name:"Csontos Györgyi",years:"born 1960s",era:"contemporary",style:"Industrial Heritage / Adaptive Reuse",desc:"Pioneer in adaptive reuse of industrial heritage buildings, particularly in Ózd.",works:["Ózd factory cultural reuse"],awards:["Ybl Prize (2020)","Pro Architectura (2017)"],tags:["contemporary"]},
+{name:"Sajtos Gábor",years:"born 1970s",era:"contemporary",style:"Contemporary / Public",desc:"His Pasaréti Community House won the 2025 Pro Architectura prize.",works:["Pasaréti Community House, Budapest"],awards:["Ybl Prize (2020)","Pro Architectura (2025)"],tags:["contemporary"]},
+{name:"Gutowski Robert",years:"born 1970s",era:"contemporary",style:"Contemporary / Sacred",desc:"Notable for contemporary sacred architecture requiring spiritual sensitivity and modern expression.",works:["Szent II. János Pál Pápa Templom, Páty"],awards:["Ybl Prize (2022)","Pro Architectura (2019)"],tags:["contemporary"]},
+{name:"Gyürki-Kiss Pál",years:"born 1970s",era:"contemporary",style:"Contemporary / Heritage",desc:"Latest Ybl Prize winner (2025). Known for heritage work in Pécs — connecting to the Breuer legacy city.",works:["Szathmáry Palace reconstruction, Pécs"],awards:["Ybl Prize (2025)","Pro Architectura (2012)"],tags:["contemporary"]},
+{name:"Perényi Tamás",years:"born 1960s",era:"contemporary",style:"Contemporary / Adaptive Reuse",desc:"Notable for creative adaptive reuse of historic industrial structures.",works:["Budafoki Water Tower conversion, Budapest"],awards:["Ybl Prize (2011)","Pro Architectura (2010)"],tags:["contemporary"]},
+{name:"Pottyondy Péter",years:"born 1960s",era:"contemporary",style:"Contemporary / Sports",desc:"Specialist in sports architecture.",works:["Diósgyőri Stadium"],awards:["Ybl Prize (2014)","Pro Architectura (2019)"],tags:["contemporary"]},
+{name:"Szűcs Endre",years:"born 1950s",era:"contemporary",style:"Heritage Restoration",desc:"Expert in castle and manor house restoration.",works:["Alsóbogát Festetics-Inkey Castle restoration"],awards:["Ybl Prize (2014)","Pro Architectura (2011)"],tags:["contemporary"]},
+{name:"Kalo Emese",years:"born 1960s",era:"contemporary",style:"Contemporary / Transport",desc:"Notable for public infrastructure design. One of few women with both Ybl and Pro Architectura recognition.",works:["Hatvan Bus Station"],awards:["Ybl Prize (2015)","Pro Architectura (2011)"],tags:["contemporary"]},
+{name:"Fejérdy Péter",years:"born 1960s",era:"contemporary",style:"Heritage / Conservation",desc:"Leading figure in architectural conservation.",works:["Kőszeg school gymnasium","Heritage conservation projects"],awards:["Ybl Prize (2011)","Pro Architectura (2011, 2020)"],tags:["contemporary"]},
+{name:"Kovács Péter",years:"born 1960s",era:"contemporary",style:"Contemporary / Educational",desc:"Academic architect contributing to university campus design.",works:["University of Debrecen Faculty of Informatics"],awards:["Ybl Prize (2015)","Pro Architectura (2013)"],tags:["contemporary"]},
+{name:"Kistelegdi István",years:"born 1960s",era:"contemporary",style:"Sustainable Architecture",desc:"Sustainability pioneer based in Pécs. DLA architect and university professor.",works:["Komló factory conversion"],awards:["Ybl Prize (1988)","Pro Architectura (2017)"],tags:["contemporary"]},
+{name:"Getto Tamás",years:"born 1960s",era:"contemporary",style:"Contemporary / Public",desc:"Known for market halls and public buildings.",works:["Pécs Market Hall"],awards:["Ybl Prize (2007)","Pro Architectura (2023)"],tags:["contemporary"]},
+{name:"Gelesz András",years:"born 1960s",era:"contemporary",style:"Contemporary / Commercial",desc:"Co-founder of Gelesz & Lenzsér. Known for high-quality commercial and heritage projects.",works:["Eiffel Palace, Budapest"],awards:["Ybl Prize (2012)","Pro Architectura (2017)"],tags:["contemporary"]},
+{name:"Lenzsér Péter",years:"born 1960s",era:"contemporary",style:"Contemporary / Commercial",desc:"Partner in Gelesz & Lenzsér.",works:["Eiffel Palace, Budapest"],awards:["Ybl Prize (2004)","Pro Architectura (2017)"],tags:["contemporary"]},
+{name:"Hőnich Henrik",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Part of the next generation of heritage-conscious architects.",works:["Heritage projects"],awards:["Ybl Prize (2016)"],tags:["contemporary"]},
+{name:"Vasáros Zsolt",years:"born 1970s",era:"contemporary",style:"Museum / Institutional",desc:"Museum and institutional architect with national recognition.",works:["Museum Restoration Center, Budapest"],awards:["Ybl Prize (2018)","Pro Architectura (2021)"],tags:["contemporary"]},
+{name:"Demeter Nóra",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Notable as one of few women recognized with the Ybl Prize.",works:["Various projects"],awards:["Ybl Prize (2017)"],tags:["contemporary"]},
+{name:"Callmeyer László",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Son of Callmeyer Ferenc — continuing a family tradition across the Ybl Prize's history.",works:["Various projects"],awards:["Ybl Prize (2018)"],tags:["contemporary"]},
+{name:"Kovács Csaba",years:"born 1960s",era:"contemporary",style:"Residential / Villa",desc:"Residential and villa architecture specialist.",works:["South Hungarian villa and guesthouse"],awards:["Ybl Prize (2017)","Pro Architectura (2012)"],tags:["contemporary"]},
+{name:"Madzin Attila",years:"born 1960s",era:"contemporary",style:"Academic / Institutional",desc:"Academic and institutional architect. M-Teampannon projects.",works:["Semmelweis University Teaching Center"],awards:["Ybl Prize (2019)","Pro Architectura (2010)"],tags:["contemporary"]},
+{name:"Kovács-Andor Krisztián",years:"born 1980s",era:"contemporary",style:"Contemporary",desc:"Represents the youngest generation of Ybl Prize laureates.",works:["Various projects"],awards:["Ybl Prize (2025)"],tags:["contemporary"]},
+{name:"Köllő Miklós",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"2025 Ybl Prize winner.",works:["Various projects"],awards:["Ybl Prize (2025)"],tags:["contemporary"]},
+{name:"Paulinyi Gergely",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Most recent Ybl Prize generation.",works:["Various projects"],awards:["Ybl Prize (2024)"],tags:["contemporary"]},
+{name:"Fajcsák Dénes",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Most recent Ybl Prize generation.",works:["Various projects"],awards:["Ybl Prize (2024)"],tags:["contemporary"]},
+{name:"Narmer Architecture Studio",years:"active",era:"contemporary",style:"Contemporary",desc:"Represents the contemporary Budapest architectural scene.",works:["Residential and commercial projects"],awards:[],tags:["contemporary"]},
+{name:"Fazakas György",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2020)"],tags:["contemporary"]},
+{name:"Pirity Attila",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2020)"],tags:["contemporary"]},
+{name:"Varga Tamás",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2020)"],tags:["contemporary"]},
+{name:"Fernezely Gergely",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Emerging contemporary architect.",works:["Various projects"],awards:["Ybl Prize (2021)"],tags:["contemporary"]},
+{name:"Erő Zsolt",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Associated with sporaarchitects. Generation that matured during EU integration.",works:["Various projects"],awards:["Ybl Prize (2021)"],tags:["contemporary"]},
+{name:"Félix Zsolt",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2022)"],tags:["contemporary"]},
+{name:"Fialovszky Tamás",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2022)"],tags:["contemporary"]},
+{name:"Karlovecz Zoltán",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2022)"],tags:["contemporary"]},
+{name:"Répás Ferenc",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2022)"],tags:["contemporary"]},
+{name:"Lente András",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2021)"],tags:["contemporary"]},
+{name:"Szőke László",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Recent Ybl Prize laureate.",works:["Various projects"],awards:["Ybl Prize (2021)"],tags:["contemporary"]},
+{name:"Kruppa Gábor",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2010)"],tags:["contemporary"]},
+{name:"Zsuffa Zsolt",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2010)"],tags:["contemporary"]},
+{name:"Klenk Csaba",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2010)"],tags:["contemporary"]},
+{name:"Szalay Tihamér",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2014)"],tags:["contemporary"]},
+{name:"Szegő György",years:"born 1950s",era:"contemporary",style:"Urban Planning / Contemporary",desc:"Urban planning and institutional architecture.",works:["Various projects"],awards:["Ybl Prize (2014)"],tags:["contemporary"]},
+{name:"Biricz Ferenc",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2014)"],tags:["contemporary"]},
+{name:"Lantay Attila",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2016)"],tags:["contemporary"]},
+{name:"Winkler Barnabás",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2009)"],tags:["contemporary"]},
+{name:"Csernyánszky Gábor",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2009)"],tags:["contemporary"]},
+{name:"Járomi Irén",years:"born 1960s",era:"contemporary",style:"Heritage Restoration",desc:"Heritage restoration specialist.",works:["Heritage projects"],awards:["Ybl Prize (2009)"],tags:["contemporary"]},
+{name:"Zsigmond László",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2007)"],tags:["contemporary"]},
+{name:"Horváth Zoltán",years:"born 1960s",era:"contemporary",style:"Contemporary / Health",desc:"Public health architecture specialist.",works:["Budakalász Health Center"],awards:["Ybl Prize (2019)","Pro Architectura (2016)"],tags:["contemporary"]},
+{name:"Tima Zoltán",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2007)"],tags:["contemporary"]},
+{name:"Pelényi Margit",years:"born 1960s",era:"contemporary",style:"Heritage / Landscape",desc:"Heritage and landscape architecture.",works:["Heritage projects"],awards:["Ybl Prize (2006)"],tags:["contemporary"]},
+{name:"Gall Anthony",years:"born 1960s",era:"contemporary",style:"Architectural History / Heritage",desc:"Architectural history and heritage specialist. University lecturer.",works:["Scholarly work"],awards:["Ybl Prize (2018)"],tags:["contemporary"]},
+{name:"Csillag Katalin",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary architect.",works:["Various projects"],awards:["Ybl Prize (2019)"],tags:["contemporary"]},
+{name:"Keller Ferenc",years:"born 1960s",era:"contemporary",style:"Cultural Architecture",desc:"Known for major cultural buildings. Co-designed the Pécs Kodály Center.",works:["Kodály Center, Pécs"],awards:["Ybl Prize (2003)","Pro Architectura (2012)"],tags:["contemporary"]},
+{name:"Zakariás Attila",years:"born 1970s",era:"contemporary",style:"Heritage Restoration",desc:"Heritage restoration specialist.",works:["Heritage projects"],awards:["Ybl Prize (2018)"],tags:["contemporary"]},
+{name:"Varga Csaba",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2017)"],tags:["contemporary"]},
+{name:"Bata Tibor",years:"born 1970s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2017)"],tags:["contemporary"]},
+{name:"Vánczai László",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2009)"],tags:["contemporary"]},
+{name:"Kiss Gyula",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2006)"],tags:["contemporary"]},
+{name:"Ripszám János",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2005)"],tags:["contemporary"]},
+{name:"Salamin Ferenc",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2005)"],tags:["contemporary"]},
+{name:"Osskó Judit",years:"born 1960s",era:"contemporary",style:"Architectural Engineering",desc:"Architectural engineering specialist.",works:["Various projects"],awards:["Ybl Prize (2005)"],tags:["contemporary"]},
+{name:"Janesch Péter",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2004)"],tags:["contemporary"]},
+{name:"Sólymos Sándor",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2004)"],tags:["contemporary"]},
+{name:"Rudolf Mihály",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2004)"],tags:["contemporary"]},
+{name:"Vadász Bence",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2004)"],tags:["contemporary"]},
+{name:"Guczogi György",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2003)"],tags:["contemporary"]},
+{name:"Magyari Éva",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2003)"],tags:["contemporary"]},
+{name:"Sugár Péter",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2002)"],tags:["contemporary"]},
+{name:"Szász László",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2002)"],tags:["contemporary"]},
+{name:"Siklósi József",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2002)"],tags:["contemporary"]},
+{name:"Nagy Bálint",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2002)"],tags:["contemporary"]},
+{name:"Istvánfi Gyula",years:"born 1950s",era:"contemporary",style:"Academic / Research",desc:"University professor and researcher.",works:["Academic work"],awards:["Ybl Prize (2001)"],tags:["contemporary"]},
+{name:"U. Nagy Gábor",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2001)"],tags:["contemporary"]},
+{name:"Zambó Terézia",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2001)"],tags:["contemporary"]},
+{name:"Sáros László",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2001)"],tags:["contemporary"]},
+{name:"Pazár Béla",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2001)"],tags:["contemporary"]},
+{name:"Palánkai Tibor",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2000)"],tags:["contemporary"]},
+{name:"Kálmán Ernő",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2000)"],tags:["contemporary"]},
+{name:"Fekete Antal",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2000)"],tags:["contemporary"]},
+{name:"Dévényi Tamás",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2000)"],tags:["contemporary"]},
+{name:"Balogh Balázs",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1998)"],tags:["contemporary"]},
+{name:"Koller József",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1998)"],tags:["contemporary"]},
+{name:"Kocsis József",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1996)"],tags:["contemporary"]},
+{name:"Skardelli György",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1997)"],tags:["contemporary"]},
+{name:"Ivánka András",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1995)"],tags:["contemporary"]},
+{name:"Karácsony Tamás",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1993)"],tags:["contemporary"]},
+{name:"Jankovics Tibor",years:"born 1960s",era:"contemporary",style:"Contemporary / Residential",desc:"Residential architecture specialist.",works:["Residential projects"],awards:["Ybl Prize (1994)"],tags:["contemporary"]},
+{name:"Locsmándi Gábor",years:"born 1950s",era:"contemporary",style:"Urban Planning",desc:"Urban planning specialist.",works:["Urban planning projects"],awards:["Ybl Prize (1994)"],tags:["contemporary"]},
+{name:"Csikós Zoltán",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (1994)"],tags:["contemporary"]},
+{name:"Viszlai József",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2016)"],tags:["contemporary"]},
+{name:"Jánosi János",years:"born 1960s",era:"contemporary",style:"Contemporary",desc:"Active contemporary practitioner.",works:["Various projects"],awards:["Ybl Prize (2014)"],tags:["contemporary"]},
+{name:"Dalnoki-Kováts Jenő",years:"active 1930s",era:"bauhaus",style:"Bauhaus / International Style",desc:"His villa is one of the finest surviving Bauhaus residential buildings in Budapest.",works:["Dalnoki-Kováts Villa, Budapest II. (1932)"],awards:[],tags:["bauhaus"]}
+];
+
+
+const eraNames = {
+  "pre-modern": "Pre-Modern & Historicist Pioneers (18th–19th Century)",
+  "secession": "Secession & Art Nouveau (1890s–1910s)",
+  "bauhaus": "Bauhaus & Early Modernism (1920s–1940s)",
+  "international": "Hungarian-Born International Giants",
+  "socialist": "Post-War Modernism & Socialist Era (1945–1989)",
+  "organic": "Organic Architecture Movement",
+  "transition": "Late 20th Century & Transition Generation",
+  "contemporary": "Contemporary Architects & Firms (2000s–Present)"
+};
+const eraDescriptions = {
+  "pre-modern": "These architects defined Budapest during the Age of Dualism (1867–1918), when Pest and Buda merged and the capital transformed into a world-class European city.",
+  "secession": "Hungary's unique Art Nouveau — the Magyar Szecesszió — drew on folk art motifs and Eastern influences to create a distinctively national architectural language.",
+  "bauhaus": "Hungary's connection to the Bauhaus is uniquely deep. Marcel Breuer, László Moholy-Nagy, and Farkas Molnár were all Hungarian-born Bauhaus masters.",
+  "international": "Born in Hungary but achieved greatest fame internationally. Their Hungarian roots profoundly influenced their work.",
+  "socialist": "Architecture under socialism oscillated between imposed Socialist Realism, creative resistance through subtle modernism, and a cautious opening to international trends.",
+  "organic": "One of Europe's most distinctive organic architecture movements — rooted in Transylvanian folk traditions and opposed to both rationalism and socialist uniformity.",
+  "transition": "These architects came of age during late socialism and reinvented Hungarian architecture for a market economy and European integration.",
+  "contemporary": "The current generation has matured into international competitiveness, representing Hungary's contemporary architectural culture."
+};
+const eraOrder = ["pre-modern","secession","bauhaus","international","socialist","organic","transition","contemporary"];
+
+function createCard(a) {
+  const card = document.createElement('div');
+  card.className = 'architect-card';
+  card.dataset.era = a.era;
+  card.dataset.search = [a.name, a.style, a.desc, ...a.works, ...a.awards, ...a.tags].join(' ').toLowerCase();
+
+  let awardsHtml = '';
+  if (a.awards.length > 0) {
+    awardsHtml = a.awards.map(aw => `<span class="tag tag-award">${aw}</span>`).join('');
+  }
+
+  let tagsHtml = a.tags.map(t => {
+    let cls = 'tag-era';
+    if (t === 'international') cls = 'tag-intl';
+    if (t === 'organic') cls = 'tag-organic';
+    if (t === 'bauhaus') cls = 'tag-intl';
+    return `<span class="tag ${cls}">${t}</span>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="card-header">
+      <span class="card-name">${a.name}</span>
+      <span class="card-years">${a.years}</span>
+    </div>
+    <div class="card-style">${a.style}</div>
+    <div class="card-desc">${a.desc}</div>
+    ${a.works.length > 0 ? `
+    <div class="card-works">
+      <h4>Key Works</h4>
+      <ul>${a.works.map(w => `<li>${w}</li>`).join('')}</ul>
+    </div>` : ''}
+    <div class="card-tags">
+      ${awardsHtml}
+      ${tagsHtml}
+    </div>
+  `;
+  return card;
+}
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function render() {
+  const container = document.getElementById('directory');
+  container.innerHTML = '';
+  const searchLower = currentSearch.toLowerCase().trim();
+  let totalVisible = 0;
+
+  eraOrder.forEach(era => {
+    const eraArchitects = architects.filter(a => {
+      const matchesEra = currentFilter === 'all' || a.era === currentFilter || a.tags.includes(currentFilter);
+      const matchesSearch = !searchLower || a.name.toLowerCase().includes(searchLower) ||
+        a.style.toLowerCase().includes(searchLower) ||
+        a.desc.toLowerCase().includes(searchLower) ||
+        a.works.some(w => w.toLowerCase().includes(searchLower)) ||
+        a.awards.some(aw => aw.toLowerCase().includes(searchLower));
+      return a.era === era && matchesEra && matchesSearch;
+    });
+
+    if (eraArchitects.length === 0) return;
+
+    const section = document.createElement('div');
+    section.className = 'era-section';
+    section.innerHTML = `
+      <h2 class="era-header">${eraNames[era] || era}</h2>
+      <p class="era-description">${eraDescriptions[era] || ''}</p>
+    `;
+    const grid = document.createElement('div');
+    grid.className = 'card-grid';
+    eraArchitects.forEach(a => grid.appendChild(createCard(a)));
+    section.appendChild(grid);
+    container.appendChild(section);
+    totalVisible += eraArchitects.length;
+  });
+
+  if (totalVisible === 0) {
+    container.innerHTML = '<div class="no-results">No architects found matching your search.</div>';
+  }
+
+  document.getElementById('results-count').textContent = `${totalVisible} architect${totalVisible !== 1 ? 's' : ''}`;
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+// Search
+document.getElementById('search').addEventListener('input', (e) => {
+  currentSearch = e.target.value;
+  render();
+});
+
+// Update total count
+document.getElementById('total-count').textContent = architects.length;
+
+// Initial render
+render();
+</script>
+</body>
+</html>
